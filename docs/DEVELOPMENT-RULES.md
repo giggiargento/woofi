@@ -102,6 +102,28 @@ No hardcodear texto temporal. Agregar la key a ambos JSON. Solo si está bloquea
 
 ---
 
+## Git — autor de commits (obligatorio en este repo)
+
+Todos los commits de WUFFI deben usar **solo** la cuenta `giggiargento`:
+
+| Campo | Valor |
+|-------|--------|
+| Nombre | `Giggi Argento` |
+| Email | `46300924+giggiargento@users.noreply.github.com` |
+
+**Nunca** commitear como `giggi-whalemate` ni con `gisela@whalemate.com`.
+
+Este repo ya tiene la config local correcta (`.git/config`). Verificá antes de commitear:
+
+```bash
+git config --local user.name
+git config --local user.email
+```
+
+Si usás Cursor/Agent para commits, confirmá que no herede el `user.name` / `user.email` **global** de otra cuenta.
+
+---
+
 ## Otras reglas
 
 - No usar mock data si Firebase está configurado
