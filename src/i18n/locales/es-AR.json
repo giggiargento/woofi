@@ -21,7 +21,8 @@
     "search": "Buscar",
     "seeAll": "Ver todo",
     "noResults": "No hay resultados",
-    "required": "Campo obligatorio"
+    "required": "Campo obligatorio",
+    "unknownStatus": "Estado desconocido"
   },
   "auth": {
     "login": "Iniciar sesión",
@@ -40,7 +41,8 @@
     "welcomeSubtitle": "Tu cuaderno digital de mascotas y la comunidad que las cuida",
     "loginError": "No pudimos iniciar sesión. Revisá tus datos.",
     "registerError": "No pudimos crear tu cuenta.",
-    "passwordsMustMatch": "Las contraseñas no coinciden"
+    "passwordsMustMatch": "Las contraseñas no coinciden",
+    "defaultDisplayName": "Usuario"
   },
   "home": {
     "greeting": "¡Hola, {{name}}!",
@@ -49,6 +51,7 @@
     "quickActionsTitle": "Acciones rápidas",
     "nearbyAlerts": "Alertas cercanas",
     "recentFavorites": "Guardados recientes",
+    "favoritesCount": "{{title}}: {{count}}",
     "empty": {
       "title": "Todavía no tenés mascotas",
       "subtitle": "Empezá agregando a tu compañero peludo al cuaderno digital",
@@ -56,7 +59,7 @@
     },
     "quickActions": {
       "addPet": "Agregar mascota",
-      "reportLost": "Reportar perdida",
+      "reportLost": "Reportar pérdida",
       "addFound": "Mascota encontrada",
       "addAdoption": "Publicar adopción",
       "addTransit": "Tránsito temporal"
@@ -112,7 +115,9 @@
     "details": "Detalles",
     "reportSighting": "Reportar avistamiento",
     "favorite": "Guardar",
-    "unfavorite": "Quitar de guardados"
+    "unfavorite": "Quitar de guardados",
+    "sightingCaseId": "Caso: {{id}}",
+    "shareMessage": "WUFFI: {{title}}\nwuffi://case/{{id}}"
   },
   "pet": {
     "title": "Mascota",
@@ -153,6 +158,12 @@
     "status": {
       "safe": "Segura",
       "lost": "Perdida"
+    },
+    "detail": {
+      "colorValue": "Color: {{value}}",
+      "ageMonthsValue": "Edad (meses): {{value}}",
+      "weightKgValue": "Peso (kg): {{value}}",
+      "allergiesValue": "Alergias: {{value}}"
     }
   },
   "create": {
@@ -207,7 +218,39 @@
     "title": "Ajustes",
     "account": "Cuenta",
     "notifications": "Notificaciones",
-    "language": "Idioma"
+    "language": "Idioma",
+    "locale": {
+      "es-AR": "Español (Argentina)",
+      "en-US": "English (United States)"
+    }
+  },
+  "locations": {
+    "provinces": {
+      "buenos_aires": "Buenos Aires",
+      "caba": "Ciudad Autónoma de Buenos Aires",
+      "catamarca": "Catamarca",
+      "chaco": "Chaco",
+      "chubut": "Chubut",
+      "cordoba": "Córdoba",
+      "corrientes": "Corrientes",
+      "entre_rios": "Entre Ríos",
+      "formosa": "Formosa",
+      "jujuy": "Jujuy",
+      "la_pampa": "La Pampa",
+      "la_rioja": "La Rioja",
+      "mendoza": "Mendoza",
+      "misiones": "Misiones",
+      "neuquen": "Neuquén",
+      "rio_negro": "Río Negro",
+      "salta": "Salta",
+      "san_juan": "San Juan",
+      "san_luis": "San Luis",
+      "santa_cruz": "Santa Cruz",
+      "santa_fe": "Santa Fe",
+      "santiago_del_estero": "Santiago del Estero",
+      "tierra_del_fuego": "Tierra del Fuego",
+      "tucuman": "Tucumán"
+    }
   },
   "errors": {
     "firebaseNotConfigured": "Firebase no está configurado. Agregá las variables en .env",

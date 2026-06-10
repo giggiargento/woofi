@@ -9,7 +9,7 @@ export function FirebaseSetupBanner() {
   if (missing.length === 0) return null;
 
   return (
-    <View className="mb-6 rounded-2xl border-2 border-border bg-pink p-4">
+    <View className="mb-6 rounded-3xl border-2 border-border bg-pink p-5">
       <Text className="mb-2 text-base font-bold text-text">{t('errors.firebaseNotConfigured')}</Text>
       <Text className="mb-2 text-sm text-text">{t('firebase.setup.missingEnv')}</Text>
       {missing.map((key) => (

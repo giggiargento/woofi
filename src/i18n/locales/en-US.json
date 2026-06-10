@@ -21,7 +21,8 @@
     "search": "Search",
     "seeAll": "See all",
     "noResults": "No results",
-    "required": "Required field"
+    "required": "Required field",
+    "unknownStatus": "Unknown status"
   },
   "auth": {
     "login": "Sign in",
@@ -40,7 +41,8 @@
     "welcomeSubtitle": "Your digital pet notebook and caring community",
     "loginError": "Could not sign in. Check your credentials.",
     "registerError": "Could not create your account.",
-    "passwordsMustMatch": "Passwords do not match"
+    "passwordsMustMatch": "Passwords do not match",
+    "defaultDisplayName": "User"
   },
   "home": {
     "greeting": "Hi, {{name}}!",
@@ -49,6 +51,7 @@
     "quickActionsTitle": "Quick actions",
     "nearbyAlerts": "Nearby alerts",
     "recentFavorites": "Recent favorites",
+    "favoritesCount": "{{title}}: {{count}}",
     "empty": {
       "title": "You don't have pets yet",
       "subtitle": "Start by adding your furry friend to your digital notebook",
@@ -112,7 +115,9 @@
     "details": "Details",
     "reportSighting": "Report sighting",
     "favorite": "Save",
-    "unfavorite": "Remove from saved"
+    "unfavorite": "Remove from saved",
+    "sightingCaseId": "Case: {{id}}",
+    "shareMessage": "WUFFI: {{title}}\nwuffi://case/{{id}}"
   },
   "pet": {
     "title": "Pet",
@@ -153,6 +158,12 @@
     "status": {
       "safe": "Safe",
       "lost": "Lost"
+    },
+    "detail": {
+      "colorValue": "Color: {{value}}",
+      "ageMonthsValue": "Age (months): {{value}}",
+      "weightKgValue": "Weight (kg): {{value}}",
+      "allergiesValue": "Allergies: {{value}}"
     }
   },
   "create": {
@@ -207,7 +218,39 @@
     "title": "Settings",
     "account": "Account",
     "notifications": "Notifications",
-    "language": "Language"
+    "language": "Language",
+    "locale": {
+      "es-AR": "Spanish (Argentina)",
+      "en-US": "English (United States)"
+    }
+  },
+  "locations": {
+    "provinces": {
+      "buenos_aires": "Buenos Aires",
+      "caba": "Autonomous City of Buenos Aires",
+      "catamarca": "Catamarca",
+      "chaco": "Chaco",
+      "chubut": "Chubut",
+      "cordoba": "Córdoba",
+      "corrientes": "Corrientes",
+      "entre_rios": "Entre Ríos",
+      "formosa": "Formosa",
+      "jujuy": "Jujuy",
+      "la_pampa": "La Pampa",
+      "la_rioja": "La Rioja",
+      "mendoza": "Mendoza",
+      "misiones": "Misiones",
+      "neuquen": "Neuquén",
+      "rio_negro": "Río Negro",
+      "salta": "Salta",
+      "san_juan": "San Juan",
+      "san_luis": "San Luis",
+      "santa_cruz": "Santa Cruz",
+      "santa_fe": "Santa Fe",
+      "santiago_del_estero": "Santiago del Estero",
+      "tierra_del_fuego": "Tierra del Fuego",
+      "tucuman": "Tucumán"
+    }
   },
   "errors": {
     "firebaseNotConfigured": "Firebase is not configured. Add variables to .env",

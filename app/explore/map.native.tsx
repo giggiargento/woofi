@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
-import { View, Text, ActivityIndicator, Platform } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { CaseCard } from '@/components';
+import { CaseCard, LoadingSpinner } from '@/components';
 import { useExploreCases } from '@/hooks/useCases';
 import { getCurrentLocation, DEFAULT_LOCATION } from '@/utils/location';
 import { CASE_TYPE_COLORS } from '@/constants';
@@ -40,11 +40,14 @@ export default function ExploreMapScreen() {
         options={{
           title: t('map.title'),
           headerStyle: { backgroundColor: '#FFF4EA' },
+          headerShadowVisible: false,
         }}
       />
       <View className="flex-1 bg-background">
         {isLoading ? (
-          <ActivityIndicator color="#F9A23B" className="absolute z-10 self-center top-1/2" />
+          <View className="absolute z-10 w-full">
+            <LoadingSpinner size="small" />
+          </View>
         ) : null}
         <MapView
           ref={mapRef}

@@ -1,9 +1,16 @@
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { CaseCard, Chip, ChipRow, SearchBar, EmptyState } from '@/components';
+import {
+  CaseCard,
+  Chip,
+  ChipRow,
+  SearchBar,
+  EmptyState,
+  IconButton,
+  LoadingSpinner,
+} from '@/components';
 import { useExploreCases } from '@/hooks/useCases';
 import { useExploreStore } from '@/stores/exploreStore';
 import { useToggleFavorite, useIsFavorite } from '@/hooks/useFavorites';
@@ -49,21 +56,11 @@ export default function ExploreScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background" edges={['top']}>
       <View className="px-4 pt-2">
-        <View className="mb-4 flex-row items-center justify-between">
-          <Text className="text-2xl font-bold text-text">{t('explore.title')}</Text>
+        <View className="mb-5 flex-row items-center justify-between">
+          <Text className="text-3xl font-bold text-text">{t('explore.title')}</Text>
           <View className="flex-row gap-2">
-            <TouchableOpacity
-              onPress={() => router.push('/explore/map')}
-              className="rounded-full border-2 border-border bg-card p-2"
-            >
-              <Ionicons name="map" size={22} color="#1F2937" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => router.push('/explore/filters')}
-              className="rounded-full border-2 border-border bg-card p-2"
-            >
-              <Ionicons name="options" size={22} color="#1F2937" />
-            </TouchableOpacity>
+            <IconButton icon="map" onPress={() => router.push('/explore/map')} />
+            <IconButton icon="options" onPress={() => router.push('/explore/filters')} />
           </View>
         </View>
 
@@ -71,10 +68,10 @@ export default function ExploreScreen() {
           value={searchQuery}
           onChangeText={setSearchQuery}
           placeholder={t('explore.searchPlaceholder')}
-          className="mb-4"
+          className="mb-5"
         />
 
-        <ChipRow>
+        <ChipRow horizontal>
           {TABS.map((tab) => (
             <Chip
               key={tab}
@@ -96,20 +93,19 @@ export default function ExploreScreen() {
       </View>
 
       {isLoading ? (
-        <ActivityIndicator color="#F9A23B" className="mt-12" />
+        <LoadingSpinner />
       ) : (
         <FlatList
           data={cases ?? []}
           keyExtractor={(item) => item.id}
-          contentContainerClassName="px-4 pb-28 pt-4"
+          contentContainerClassName="px-4 pb-32 pt-2"
           refreshing={isRefetching}
           onRefresh={refetch}
+          showsVerticalScrollIndicator={false}
           ListEmptyComponent={
-            <EmptyState title={t('explore.empty')} icon="search-outline" />
+            <EmptyState title={t('explore.empty')} icon="search-outline" accent="sky" />
           }
-          renderItem={({ item }) => (
-            <ExploreCaseCard caseItem={item} />
-          )}
+          renderItem={({ item }) => <ExploreCaseCard caseItem={item} />}
         />
       )}
     </SafeAreaView>

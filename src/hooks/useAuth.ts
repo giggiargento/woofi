@@ -4,6 +4,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { subscribeToAuth, signInWithEmail, registerWithEmail, signOutUser, resetPassword } from '@/services/firebase/auth';
 import { getOrCreateUser } from '@/services/users/userService';
 import { isFirebaseConfigured } from '@/services/firebase/app';
+import i18n from '@/i18n';
 
 export function useAuthInit() {
   const { setFirebaseUser, setUserProfile, setLoading, setInitialized, reset } = useAuthStore();
@@ -22,7 +23,7 @@ export function useAuthInit() {
           const profile = await getOrCreateUser({
             uid: user.uid,
             email: user.email ?? '',
-            displayName: user.displayName ?? user.email?.split('@')[0] ?? 'Usuario',
+            displayName: user.displayName ?? user.email?.split('@')[0] ?? i18n.t('auth.defaultDisplayName'),
           });
           setUserProfile(profile);
         } catch {

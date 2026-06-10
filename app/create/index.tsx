@@ -6,37 +6,19 @@ import { Ionicons } from '@expo/vector-icons';
 import { Card } from '@/components';
 
 const CREATE_OPTIONS = [
-  {
-    key: 'personalPet',
-    icon: 'paw' as const,
-    route: '/create/personal/1',
-    color: 'bg-lavender',
-  },
-  {
-    key: 'lostPet',
-    icon: 'alert-circle' as const,
-    route: '/create/lost/1',
-    color: 'bg-primary',
-  },
-  {
-    key: 'foundPet',
-    icon: 'search' as const,
-    route: '/create/found/1',
-    color: 'bg-sky',
-  },
-  {
-    key: 'adoption',
-    icon: 'heart' as const,
-    route: '/create/adoption/1',
-    color: 'bg-mint',
-  },
-  {
-    key: 'transit',
-    icon: 'car' as const,
-    route: '/create/transit/1',
-    color: 'bg-lavender',
-  },
+  { key: 'personalPet', icon: 'paw' as const, route: '/create/personal/1', color: 'lavender' as const },
+  { key: 'lostPet', icon: 'alert-circle' as const, route: '/create/lost/1', color: 'primary' as const },
+  { key: 'foundPet', icon: 'search' as const, route: '/create/found/1', color: 'sky' as const },
+  { key: 'adoption', icon: 'heart' as const, route: '/create/adoption/1', color: 'mint' as const },
+  { key: 'transit', icon: 'car' as const, route: '/create/transit/1', color: 'lavender' as const },
 ];
+
+const pastelClass = {
+  lavender: 'bg-lavender',
+  primary: 'bg-primary',
+  sky: 'bg-sky',
+  mint: 'bg-mint',
+} as const;
 
 export default function CreateIndexScreen() {
   const { t } = useTranslation();
@@ -48,18 +30,29 @@ export default function CreateIndexScreen() {
         options={{
           title: t('create.title'),
           headerStyle: { backgroundColor: '#FFF4EA' },
+          headerShadowVisible: false,
         }}
       />
       <SafeAreaView className="flex-1 bg-background" edges={['bottom']}>
-        <ScrollView className="flex-1 px-4 py-4" contentContainerClassName="pb-8">
-          <Text className="mb-6 text-center text-lg text-muted">{t('create.title')}</Text>
+        <ScrollView
+          className="flex-1 px-4 py-4"
+          contentContainerClassName="pb-10"
+          showsVerticalScrollIndicator={false}
+        >
+          <Text className="mb-6 text-center text-base leading-6 text-muted">
+            {t('create.title')}
+          </Text>
           {CREATE_OPTIONS.map((option) => (
             <TouchableOpacity
               key={option.key}
               onPress={() => router.push(option.route as never)}
-              activeOpacity={0.85}
+              activeOpacity={0.9}
+              className="mb-4"
             >
-              <Card className={`mb-4 flex-row items-center ${option.color}`}>
+              <Card
+                variant="floating"
+                className={`flex-row items-center p-4 ${pastelClass[option.color]}`}
+              >
                 <View className="mr-4 rounded-2xl border-2 border-border bg-card p-3">
                   <Ionicons name={option.icon} size={28} color="#1F2937" />
                 </View>
@@ -67,7 +60,7 @@ export default function CreateIndexScreen() {
                   <Text className="text-base font-bold text-text">
                     {t(`create.${option.key}`)}
                   </Text>
-                  <Text className="mt-1 text-sm text-muted">
+                  <Text className="mt-1 text-sm leading-5 text-muted">
                     {t(`create.${option.key}Desc`)}
                   </Text>
                 </View>

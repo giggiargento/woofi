@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { View, Text, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Input, PrimaryButton } from '@/components';
+import { Input, Button } from '@/components';
 import { forgotPasswordSchema } from '@/schemas';
 import { useAuth } from '@/hooks/useAuth';
 import { isFirebaseConfigured } from '@/services/firebase/app';
@@ -45,8 +45,8 @@ export default function ForgotPasswordScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1 justify-center px-6"
       >
-        <Text className="mb-2 text-2xl font-bold text-text">{t('auth.forgotPassword')}</Text>
-        <Text className="mb-6 text-base text-muted">{t('auth.email')}</Text>
+        <Text className="mb-2 text-3xl font-bold text-text">{t('auth.forgotPassword')}</Text>
+        <Text className="mb-8 text-base leading-6 text-muted">{t('auth.email')}</Text>
         <Input
           label={t('auth.email')}
           value={email}
@@ -54,7 +54,7 @@ export default function ForgotPasswordScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
         />
-        <PrimaryButton title={t('auth.resetPassword')} onPress={handleReset} loading={loading} />
+        <Button title={t('auth.resetPassword')} onPress={handleReset} loading={loading} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

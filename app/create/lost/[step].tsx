@@ -13,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { Input, PrimaryButton } from '@/components';
 import { useCreateCase } from '@/hooks/useCases';
 import { usePet } from '@/hooks/usePets';
-import { ARGENTINA_PROVINCES, SPECIES } from '@/constants';
+import { ARGENTINA_PROVINCE_IDS, DEFAULT_PROVINCE_ID, SPECIES, type ArgentinaProvinceId } from '@/constants';
+import { provinceLabel } from '@/i18n/provinces';
 import { getCurrentLocation, DEFAULT_LOCATION, type LocationResult } from '@/utils/location';
 import type { CreateLostCaseInput, Species } from '@/types';
 
@@ -28,7 +29,7 @@ export default function CreateLostCaseScreen() {
   const [description, setDescription] = useState('');
   const [petName, setPetName] = useState('');
   const [species, setSpecies] = useState<Species>('dog');
-  const [province, setProvince] = useState('Ciudad Autónoma de Buenos Aires');
+  const [provinceId, setProvinceId] = useState<ArgentinaProvinceId>(DEFAULT_PROVINCE_ID);
   const [city, setCity] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [phone, setPhone] = useState('');
@@ -67,7 +68,7 @@ export default function CreateLostCaseScreen() {
       title,
       description,
       location,
-      province,
+      province: provinceLabel(t, provinceId),
       city,
       neighborhood: neighborhood || undefined,
       addressText: location.addressText,
@@ -129,15 +130,15 @@ export default function CreateLostCaseScreen() {
 
           <Text className="mb-2 text-sm font-medium text-text">{t('explore.province')}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
-            {ARGENTINA_PROVINCES.slice(0, 6).map((p) => (
+            {ARGENTINA_PROVINCE_IDS.slice(0, 6).map((id) => (
               <TouchableOpacity
-                key={p}
-                onPress={() => setProvince(p)}
+                key={id}
+                onPress={() => setProvinceId(id)}
                 className={`mr-2 rounded-full border-2 border-border px-3 py-2 ${
-                  province === p ? 'bg-sky' : 'bg-card'
+                  provinceId === id ? 'bg-sky' : 'bg-card'
                 }`}
               >
-                <Text className="text-xs font-medium">{p}</Text>
+                <Text className="text-xs font-medium">{provinceLabel(t, id)}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>

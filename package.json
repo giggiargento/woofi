@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "check:firebase": "node scripts/check-firebase-env.mjs",
     "verify:firebase": "node scripts/verify-firebase.mjs",
-    "verify": "npm run typecheck && npm run check:firebase && npm run verify:firebase"
+    "audit:i18n": "node scripts/audit-i18n.mjs",
+    "verify": "npm run typecheck && npm run check:firebase && npm run audit:i18n && npm run verify:firebase"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",

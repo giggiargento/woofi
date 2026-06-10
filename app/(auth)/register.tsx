@@ -10,7 +10,7 @@ import {
 import { Link, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Input, PrimaryButton } from '@/components';
+import { Input, Button } from '@/components';
 import { registerSchema } from '@/schemas';
 import { useAuth } from '@/hooks/useAuth';
 import { isFirebaseConfigured } from '@/services/firebase/app';
@@ -67,10 +67,12 @@ export default function RegisterScreen() {
         className="flex-1"
       >
         <ScrollView
-          contentContainerClassName="flex-grow px-6 py-8"
+          contentContainerClassName="flex-grow px-6 py-10"
           keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
         >
-          <Text className="mb-6 text-2xl font-bold text-text">{t('auth.register')}</Text>
+          <Text className="mb-2 text-3xl font-bold text-text">{t('auth.register')}</Text>
+          <Text className="mb-8 text-base text-muted">{t('auth.welcomeSubtitle')}</Text>
 
           <Input
             label={t('auth.displayName')}
@@ -101,17 +103,17 @@ export default function RegisterScreen() {
             error={errors.confirmPassword}
           />
 
-          <PrimaryButton
+          <Button
             title={t('auth.register')}
             onPress={handleRegister}
             loading={isRegistering}
             className="mt-2"
           />
 
-          <View className="mt-6 flex-row justify-center">
+          <View className="mt-8 flex-row justify-center">
             <Text className="text-muted">{t('auth.hasAccount')} </Text>
             <Link href="/(auth)/login">
-              <Text className="font-semibold text-primary">{t('auth.login')}</Text>
+              <Text className="font-bold text-primary">{t('auth.login')}</Text>
             </Link>
           </View>
         </ScrollView>

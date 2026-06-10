@@ -1,7 +1,7 @@
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import { FlatList } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { CaseCard, EmptyState } from '@/components';
+import { CaseCard, EmptyState, LoadingSpinner } from '@/components';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useCase } from '@/hooks/useCases';
 
@@ -28,23 +28,24 @@ export default function FavoritesScreen() {
         options={{
           title: t('favorites.title'),
           headerStyle: { backgroundColor: '#FFF4EA' },
+          headerShadowVisible: false,
         }}
       />
       {isLoading ? (
-        <View className="flex-1 items-center justify-center bg-background">
-          <ActivityIndicator color="#F9A23B" />
-        </View>
+        <LoadingSpinner />
       ) : (
         <FlatList
           className="flex-1 bg-background"
-          contentContainerClassName="px-4 py-4 pb-8"
+          contentContainerClassName="px-4 py-4 pb-10"
           data={caseFavorites}
           keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
           ListEmptyComponent={
             <EmptyState
               title={t('favorites.empty')}
               subtitle={t('favorites.emptySubtitle')}
               icon="heart-outline"
+              accent="pink"
             />
           }
           renderItem={({ item }) => <FavoriteCaseItem caseId={item.targetId} />}

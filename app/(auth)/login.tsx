@@ -10,11 +10,12 @@ import {
 import { Link, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Input, PrimaryButton } from '@/components';
+import { Input, Button } from '@/components';
 import { FirebaseSetupBanner } from '@/components/FirebaseSetupBanner';
 import { loginSchema } from '@/schemas';
 import { useAuth } from '@/hooks/useAuth';
 import { isFirebaseConfigured } from '@/services/firebase/app';
+import { shadows } from '@/components';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
@@ -56,16 +57,22 @@ export default function LoginScreen() {
         className="flex-1"
       >
         <ScrollView
-          contentContainerClassName="flex-grow justify-center px-6 py-8"
+          contentContainerClassName="flex-grow justify-center px-6 py-10"
           keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
         >
           <FirebaseSetupBanner />
-          <View className="mb-8 items-center">
-            <Text className="text-4xl">🐾</Text>
-            <Text className="mt-4 text-center text-2xl font-bold text-text">
+          <View className="mb-10 items-center">
+            <View
+              className="mb-5 rounded-full border-2 border-border bg-primary p-6"
+              style={shadows.float}
+            >
+              <Text className="text-5xl">🐾</Text>
+            </View>
+            <Text className="text-center text-3xl font-bold text-text">
               {t('auth.welcomeTitle')}
             </Text>
-            <Text className="mt-2 text-center text-base text-muted">
+            <Text className="mt-3 max-w-xs text-center text-base leading-6 text-muted">
               {t('auth.welcomeSubtitle')}
             </Text>
           </View>
@@ -88,21 +95,17 @@ export default function LoginScreen() {
           />
 
           <Link href="/(auth)/forgot-password" asChild>
-            <Text className="mb-6 text-right text-sm font-medium text-primary">
+            <Text className="mb-6 text-right text-sm font-semibold text-primary">
               {t('auth.forgotPassword')}
             </Text>
           </Link>
 
-          <PrimaryButton
-            title={t('auth.login')}
-            onPress={handleLogin}
-            loading={isLoggingIn}
-          />
+          <Button title={t('auth.login')} onPress={handleLogin} loading={isLoggingIn} />
 
-          <View className="mt-6 flex-row justify-center">
+          <View className="mt-8 flex-row justify-center">
             <Text className="text-muted">{t('auth.noAccount')} </Text>
             <Link href="/(auth)/register">
-              <Text className="font-semibold text-primary">{t('auth.register')}</Text>
+              <Text className="font-bold text-primary">{t('auth.register')}</Text>
             </Link>
           </View>
         </ScrollView>

@@ -7,6 +7,8 @@ module.exports = {
       colors: {
         primary: '#F9A23B',
         background: '#FFF4EA',
+        cream: '#FFF9F3',
+        butter: '#FFF4B8',
         lavender: '#D8C3FF',
         pink: '#FFC8D8',
         sky: '#BDEFFF',
@@ -17,8 +19,14 @@ module.exports = {
         border: '#000000',
       },
       borderRadius: {
-        '2xl': '16px',
+        '2xl': '20px',
         '3xl': '24px',
+        '4xl': '28px',
+      },
+      fontFamily: {
+        sans: ['Inter_400Regular'],
+        semibold: ['Inter_600SemiBold'],
+        bold: ['Inter_700Bold'],
       },
       boxShadow: {
         soft: '0 4px 12px rgba(0, 0, 0, 0.08)',

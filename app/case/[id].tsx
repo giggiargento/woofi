@@ -1,9 +1,17 @@
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Linking, Share } from 'react-native';
+import { View, Text, ScrollView, Linking, Share } from 'react-native';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { Card, StatusBadge, PrimaryButton } from '@/components';
+import {
+  Card,
+  Badge,
+  Button,
+  LoadingSpinner,
+  IconButton,
+  SectionHeader,
+} from '@/components';
+import { shadows } from '@/components';
 import { useCase } from '@/hooks/useCases';
 import { useIsFavorite, useToggleFavorite } from '@/hooks/useFavorites';
 import { useAuthStore } from '@/stores/authStore';
@@ -21,7 +29,7 @@ export default function CaseDetailScreen() {
   if (isLoading || !caseItem) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
-        <ActivityIndicator color="#F9A23B" size="large" />
+        <LoadingSpinner />
       </View>
     );
   }
@@ -41,7 +49,7 @@ export default function CaseDetailScreen() {
 
   const handleShare = async () => {
     await Share.share({
-      message: `WUFFI: ${caseItem.title}\nwuffi://case/${caseItem.id}`,
+      message: t('case.shareMessage', { title: caseItem.title, id: caseItem.id }),
       url: `wuffi://case/${caseItem.id}`,
     });
   };
@@ -53,9 +61,11 @@ export default function CaseDetailScreen() {
           headerShown: true,
           title: t(`case.type.${caseItem.caseType}`),
           headerStyle: { backgroundColor: '#FFF4EA' },
+          headerShadowVisible: false,
           headerRight: () =>
             userId ? (
-              <TouchableOpacity
+              <IconButton
+                icon={isFav ? 'heart' : 'heart-outline'}
                 onPress={() =>
                   toggleFavorite.mutate({
                     targetType: 'case',
@@ -64,73 +74,77 @@ export default function CaseDetailScreen() {
                   })
                 }
                 className="mr-2"
-              >
-                <Ionicons
-                  name={isFav ? 'heart' : 'heart-outline'}
-                  size={24}
-                  color="#F9A23B"
-                />
-              </TouchableOpacity>
+              />
             ) : null,
         }}
       />
-      <ScrollView className="flex-1 bg-background" contentContainerClassName="pb-8">
-        {photo ? (
-          <Image source={{ uri: photo }} className="h-64 w-full" contentFit="cover" />
-        ) : (
-          <View
-            className="h-64 w-full items-center justify-center"
-            style={{ backgroundColor: CASE_TYPE_COLORS[caseItem.caseType] }}
-          >
-            <Ionicons name="paw" size={64} color="#1F2937" />
-          </View>
-        )}
-
+      <ScrollView
+        className="flex-1 bg-background"
+        contentContainerClassName="pb-10"
+        showsVerticalScrollIndicator={false}
+      >
         <View className="px-4 pt-4">
-          <StatusBadge status={caseItem.status} caseType={caseItem.caseType} />
-          <Text className="mt-3 text-2xl font-bold text-text">{caseItem.title}</Text>
+          <View
+            className="overflow-hidden rounded-3xl border-2 border-border bg-card"
+            style={shadows.float}
+          >
+            {photo ? (
+              <Image source={{ uri: photo }} className="h-72 w-full" contentFit="cover" />
+            ) : (
+              <View
+                className="h-72 w-full items-center justify-center"
+                style={{ backgroundColor: CASE_TYPE_COLORS[caseItem.caseType] }}
+              >
+                <Ionicons name="paw" size={72} color="#1F2937" />
+              </View>
+            )}
+          </View>
+        </View>
+
+        <View className="px-4 pt-5">
+          <Badge status={caseItem.status} caseType={caseItem.caseType} size="md" />
+          <Text className="mt-4 text-3xl font-bold text-text">{caseItem.title}</Text>
           <Text className="mt-1 text-base text-muted">
             {caseItem.petSnapshot.name} · {t(`pet.species.${caseItem.petSnapshot.species}`)}
           </Text>
 
-          <Card className="mt-4">
-            <Text className="mb-2 text-sm font-semibold text-text">{t('case.description')}</Text>
-            <Text className="text-base text-muted">{caseItem.description}</Text>
+          <Card className="mt-5" variant="floating">
+            <Text className="mb-2 text-lg font-bold text-text">{t('case.description')}</Text>
+            <Text className="text-base leading-6 text-muted">{caseItem.description}</Text>
           </Card>
 
-          <Card className="mt-3">
-            <Text className="mb-2 text-sm font-semibold text-text">{t('case.location')}</Text>
-            <Text className="text-base text-muted">
+          <Card className="mt-4" variant="floating" pastel="sky">
+            <View className="mb-2 flex-row items-center">
+              <Ionicons name="location-outline" size={18} color="#1F2937" />
+              <Text className="ml-2 text-lg font-bold text-text">{t('case.location')}</Text>
+            </View>
+            <Text className="text-base leading-6 text-muted">
               {[caseItem.addressText, caseItem.neighborhood, caseItem.city, caseItem.province]
                 .filter(Boolean)
                 .join(', ')}
             </Text>
           </Card>
 
-          <Text className="mb-3 mt-6 text-lg font-bold text-text">{t('case.contact.title')}</Text>
+          <SectionHeader title={t('case.contact.title')} className="mt-6" />
           {caseItem.contact.showWhatsApp && caseItem.contact.whatsApp ? (
-            <PrimaryButton
+            <Button
               title={t('case.contact.whatsapp')}
               onPress={handleWhatsApp}
               className="mb-3"
             />
           ) : null}
           {caseItem.contact.showPhone && caseItem.contact.phone ? (
-            <PrimaryButton
+            <Button
               title={t('case.contact.call')}
               variant="secondary"
               onPress={handleCall}
               className="mb-3"
             />
           ) : null}
-          <PrimaryButton
-            title={t('case.contact.share')}
-            variant="outline"
-            onPress={handleShare}
-          />
+          <Button title={t('case.contact.share')} variant="outline" onPress={handleShare} />
 
           {caseItem.caseType === 'lost' ? (
-            <PrimaryButton
+            <Button
               title={t('case.reportSighting')}
               variant="secondary"
               onPress={() => router.push(`/case/${id}/sighting`)}

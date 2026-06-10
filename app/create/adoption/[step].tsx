@@ -13,7 +13,8 @@ import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Input, PrimaryButton } from '@/components';
 import { useCreateCase } from '@/hooks/useCases';
-import { ARGENTINA_PROVINCES, SPECIES } from '@/constants';
+import { DEFAULT_PROVINCE_ID, SPECIES } from '@/constants';
+import { provinceLabel } from '@/i18n/provinces';
 import { getCurrentLocation, DEFAULT_LOCATION } from '@/utils/location';
 import type { CreateAdoptionCaseInput, Species } from '@/types';
 
@@ -26,7 +27,6 @@ export default function CreateAdoptionCaseScreen() {
   const [description, setDescription] = useState('');
   const [petName, setPetName] = useState('');
   const [species, setSpecies] = useState<Species>('dog');
-  const [province, setProvince] = useState('Ciudad Autónoma de Buenos Aires');
   const [city, setCity] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [phone, setPhone] = useState('');
@@ -52,7 +52,7 @@ export default function CreateAdoptionCaseScreen() {
       title,
       description,
       location,
-      province,
+      province: provinceLabel(t, DEFAULT_PROVINCE_ID),
       city,
       neighborhood: neighborhood || undefined,
       adoptionLocation: location,

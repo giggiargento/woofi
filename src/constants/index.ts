@@ -1,6 +1,8 @@
 export const COLORS = {
   primary: '#F9A23B',
   background: '#FFF4EA',
+  cream: '#FFF9F3',
+  butter: '#FFF4B8',
   lavender: '#D8C3FF',
   pink: '#FFC8D8',
   sky: '#BDEFFF',
@@ -20,6 +22,7 @@ export const CASE_TYPE_COLORS = {
 
 export const DEFAULT_LOCALE = 'es-AR' as const;
 export const SUPPORTED_LOCALES = ['es-AR', 'en-US'] as const;
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export const DEFAULT_NOTIFICATION_RADIUS_KM = 10;
 
@@ -40,29 +43,35 @@ export const CASE_TYPES = ['lost', 'found', 'adoption', 'transit'] as const;
 export const SPECIES = ['dog', 'cat', 'rabbit', 'bird', 'other'] as const;
 export const SEX_OPTIONS = ['male', 'female', 'unknown'] as const;
 
-export const ARGENTINA_PROVINCES = [
-  'Buenos Aires',
-  'Ciudad Autónoma de Buenos Aires',
-  'Catamarca',
-  'Chaco',
-  'Chubut',
-  'Córdoba',
-  'Corrientes',
-  'Entre Ríos',
-  'Formosa',
-  'Jujuy',
-  'La Pampa',
-  'La Rioja',
-  'Mendoza',
-  'Misiones',
-  'Neuquén',
-  'Río Negro',
-  'Salta',
-  'San Juan',
-  'San Luis',
-  'Santa Cruz',
-  'Santa Fe',
-  'Santiago del Estero',
-  'Tierra del Fuego',
-  'Tucumán',
+export const ARGENTINA_PROVINCE_IDS = [
+  'buenos_aires',
+  'caba',
+  'catamarca',
+  'chaco',
+  'chubut',
+  'cordoba',
+  'corrientes',
+  'entre_rios',
+  'formosa',
+  'jujuy',
+  'la_pampa',
+  'la_rioja',
+  'mendoza',
+  'misiones',
+  'neuquen',
+  'rio_negro',
+  'salta',
+  'san_juan',
+  'san_luis',
+  'santa_cruz',
+  'santa_fe',
+  'santiago_del_estero',
+  'tierra_del_fuego',
+  'tucuman',
 ] as const;
+
+export type ArgentinaProvinceId = (typeof ARGENTINA_PROVINCE_IDS)[number];
+export const DEFAULT_PROVINCE_ID: ArgentinaProvinceId = 'caba';
+
+/** @deprecated Use ARGENTINA_PROVINCE_IDS + i18n locations.provinces.* */
+export const ARGENTINA_PROVINCES = ARGENTINA_PROVINCE_IDS;
