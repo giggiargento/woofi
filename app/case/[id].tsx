@@ -10,12 +10,14 @@ import {
   LoadingSpinner,
   IconButton,
   SectionHeader,
+  SpeciesBadge,
 } from '@/components';
 import { shadows } from '@/components';
 import { useCase } from '@/hooks/useCases';
 import { useIsFavorite, useToggleFavorite } from '@/hooks/useFavorites';
 import { useAuthStore } from '@/stores/authStore';
-import { CASE_TYPE_COLORS } from '@/constants';
+import { PET_SPECIES_ICONS, PET_SPECIES_PLACEHOLDER_BG } from '@/utils/speciesIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function CaseDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -35,6 +37,7 @@ export default function CaseDetailScreen() {
   }
 
   const photo = caseItem.petSnapshot.photoUrls[0];
+  const species = caseItem.petSnapshot.species;
 
   const handleWhatsApp = () => {
     const number = caseItem.contact.whatsApp ?? caseItem.contact.phone;
@@ -92,10 +95,13 @@ export default function CaseDetailScreen() {
               <Image source={{ uri: photo }} className="h-72 w-full" contentFit="cover" />
             ) : (
               <View
-                className="h-72 w-full items-center justify-center"
-                style={{ backgroundColor: CASE_TYPE_COLORS[caseItem.caseType] }}
+                className={`h-72 w-full items-center justify-center ${PET_SPECIES_PLACEHOLDER_BG[species]}`}
               >
-                <Ionicons name="paw" size={72} color="#1F2937" />
+                <MaterialCommunityIcons
+                  name={PET_SPECIES_ICONS[species]}
+                  size={72}
+                  color="#1F2937"
+                />
               </View>
             )}
           </View>
@@ -104,9 +110,10 @@ export default function CaseDetailScreen() {
         <View className="px-4 pt-5">
           <Badge status={caseItem.status} caseType={caseItem.caseType} size="md" />
           <Text className="mt-4 text-3xl font-bold text-text">{caseItem.title}</Text>
-          <Text className="mt-1 text-base text-muted">
-            {caseItem.petSnapshot.name} · {t(`pet.species.${caseItem.petSnapshot.species}`)}
-          </Text>
+          <View className="mt-2 flex-row flex-wrap items-center gap-2">
+            <Text className="text-base font-semibold text-text">{caseItem.petSnapshot.name}</Text>
+            <SpeciesBadge species={species} size="md" />
+          </View>
 
           <Card className="mt-5" variant="floating">
             <Text className="mb-2 text-lg font-bold text-text">{t('case.description')}</Text>

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SPECIES, SEX_OPTIONS } from '@/constants';
+import { PET_SPECIES, SEX_OPTIONS } from '@/constants';
 import { combineAgeMonths, MAX_PET_AGE_MONTHS, MAX_PET_AGE_YEARS } from '@/utils/petAge';
 
 export const loginSchema = z.object({
@@ -74,7 +74,7 @@ export function parsePetAgeInput(ageYears: string, ageMonthsPart: string) {
 
 export const petSchema = z.object({
   name: z.string().min(1).max(50),
-  species: z.enum(SPECIES as unknown as [string, ...string[]]),
+  species: z.enum(PET_SPECIES),
   breed: z.string().max(80).optional(),
   sex: z.enum(SEX_OPTIONS as unknown as [string, ...string[]]),
   ageMonths: z.number().min(1).max(MAX_PET_AGE_MONTHS).optional(),

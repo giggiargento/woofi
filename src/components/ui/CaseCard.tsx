@@ -1,10 +1,12 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Badge } from './Badge';
+import { SpeciesBadge } from './SpeciesSelector';
 import { shadows } from './shadows';
 import { CASE_TYPE_COLORS } from '@/constants';
+import { PET_SPECIES_ICONS } from '@/utils/speciesIcons';
 import type { Case } from '@/types';
 
 interface CaseCardProps {
@@ -17,6 +19,7 @@ interface CaseCardProps {
 export function CaseCard({ caseItem, onPress, onFavorite, isFavorite }: CaseCardProps) {
   const { t } = useTranslation();
   const photo = caseItem.petSnapshot.photoUrls[0];
+  const species = caseItem.petSnapshot.species;
   const location = [caseItem.neighborhood, caseItem.city, caseItem.province]
     .filter(Boolean)
     .join(', ');
@@ -35,7 +38,11 @@ export function CaseCard({ caseItem, onPress, onFavorite, isFavorite }: CaseCard
               className="h-[120px] w-[120px] items-center justify-center"
               style={{ backgroundColor: CASE_TYPE_COLORS[caseItem.caseType] }}
             >
-              <Ionicons name="paw" size={36} color="#1F2937" />
+              <MaterialCommunityIcons
+                name={PET_SPECIES_ICONS[species]}
+                size={40}
+                color="#1F2937"
+              />
             </View>
           )}
         </View>
@@ -59,9 +66,12 @@ export function CaseCard({ caseItem, onPress, onFavorite, isFavorite }: CaseCard
           <Text className="text-base font-bold text-text" numberOfLines={1}>
             {caseItem.title}
           </Text>
-          <Text className="mt-0.5 text-sm text-muted" numberOfLines={1}>
-            {caseItem.petSnapshot.name} · {t(`pet.species.${caseItem.petSnapshot.species}`)}
-          </Text>
+          <View className="mt-1 flex-row flex-wrap items-center gap-2">
+            <Text className="text-sm text-muted" numberOfLines={1}>
+              {caseItem.petSnapshot.name}
+            </Text>
+            <SpeciesBadge species={species} />
+          </View>
           {location ? (
             <View className="mt-2 flex-row items-center">
               <Ionicons name="location-outline" size={12} color="#6B7280" />

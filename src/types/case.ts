@@ -7,9 +7,11 @@ export type TemporaryCare = 'with_finder' | 'shelter' | 'street' | 'vet' | 'fost
 export type ContactMethod = 'whatsapp' | 'phone' | 'in_app';
 export type PetSize = 'small' | 'medium' | 'large';
 
+import type { PetSpecies } from './species';
+
 export interface PetSnapshot {
   name: string;
-  species: string;
+  species: PetSpecies;
   breed?: string;
   sex?: string;
   ageMonths?: number;
@@ -151,7 +153,7 @@ export type CreateCaseInput =
 
 export interface ExploreFilters {
   caseType?: CaseType;
-  species?: string;
+  species?: PetSpecies;
   province?: string;
   city?: string;
   neighborhood?: string;

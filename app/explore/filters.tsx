@@ -4,8 +4,11 @@ import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Input, Button, Chip, ChipRow } from '@/components';
 import { useExploreStore } from '@/stores/exploreStore';
-import { ARGENTINA_PROVINCE_IDS, SPECIES, type ArgentinaProvinceId } from '@/constants';
+import { ARGENTINA_PROVINCE_IDS, PET_SPECIES, type ArgentinaProvinceId } from '@/constants';
 import { provinceIdFromName, provinceLabel } from '@/i18n/provinces';
+import { PET_SPECIES_ICONS } from '@/utils/speciesIcons';
+import type { PetSpecies } from '@/types';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function ExploreFiltersScreen() {
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ export default function ExploreFiltersScreen() {
   );
   const [city, setCity] = useState(filters.city ?? '');
   const [neighborhood, setNeighborhood] = useState(filters.neighborhood ?? '');
-  const [species, setSpecies] = useState(filters.species ?? '');
+  const [species, setSpecies] = useState<PetSpecies | ''>(filters.species ?? '');
 
   const handleApply = () => {
     setFilters({
@@ -63,13 +66,20 @@ export default function ExploreFiltersScreen() {
 
         <Text className="mb-3 mt-2 text-sm font-semibold text-text">{t('explore.species')}</Text>
         <ChipRow>
-          {SPECIES.map((s) => (
+          {PET_SPECIES.map((s) => (
             <Chip
               key={s}
               label={t(`pet.species.${s}`)}
               selected={species === s}
               onPress={() => setSpecies(species === s ? '' : s)}
               color="lavender"
+              icon={
+                <MaterialCommunityIcons
+                  name={PET_SPECIES_ICONS[s]}
+                  size={18}
+                  color="#1F2937"
+                />
+              }
             />
           ))}
         </ChipRow>

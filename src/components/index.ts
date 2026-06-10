@@ -17,5 +17,6 @@ export { ListRow } from './ui/ListRow';
 export { ScreenHeader } from './ui/ScreenHeader';
 export { LoadingSpinner } from './ui/LoadingSpinner';
 export { Screen } from './ui/Screen';
+export { SpeciesSelector, SpeciesBadge } from './ui/SpeciesSelector';
 export { theme } from './ui/theme';
 export { shadows } from './ui/shadows';

@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Input, PrimaryButton, PetAgeInput } from '@/components';
+import { Input, PrimaryButton, PetAgeInput, SpeciesSelector } from '@/components';
 import { parsePetAgeInput, petSchema } from '@/schemas';
 import { useCreatePet } from '@/hooks/usePets';
-import { SPECIES, SEX_OPTIONS } from '@/constants';
+import { DEFAULT_PET_SPECIES, SEX_OPTIONS } from '@/constants';
 import { MAX_PET_AGE_YEARS } from '@/utils/petAge';
-import type { Species, Sex } from '@/types';
+import type { PetSpecies, Sex } from '@/types';
 
 export default function CreatePersonalPetScreen() {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ export default function CreatePersonalPetScreen() {
   const createPet = useCreatePet();
 
   const [name, setName] = useState('');
-  const [species, setSpecies] = useState<Species>('dog');
+  const [species, setSpecies] = useState<PetSpecies>(DEFAULT_PET_SPECIES);
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState<Sex>('unknown');
   const [color, setColor] = useState('');
@@ -92,20 +92,7 @@ export default function CreatePersonalPetScreen() {
           <Text className="mb-4 text-sm text-muted">{t('create.step', { current: 1, total: 1 })}</Text>
           <Input label={t('pet.form.name')} value={name} onChangeText={setName} />
 
-          <Text className="mb-2 text-sm font-medium text-text">{t('pet.form.species')}</Text>
-          <View className="mb-4 flex-row flex-wrap">
-            {SPECIES.map((s) => (
-              <TouchableOpacity
-                key={s}
-                onPress={() => setSpecies(s)}
-                className={`mb-2 mr-2 rounded-full border-2 border-border px-4 py-2 ${
-                  species === s ? 'bg-primary' : 'bg-card'
-                }`}
-              >
-                <Text className="text-sm font-medium">{t(`pet.species.${s}`)}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <SpeciesSelector value={species} onChange={setSpecies} />
 
           <Input label={t('pet.form.breed')} value={breed} onChangeText={setBreed} />
 

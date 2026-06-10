@@ -13,6 +13,8 @@ export type {
   Sex,
   PetStatus,
 } from './pet';
+export type { PetSpecies } from './species';
+export { PET_SPECIES, DEFAULT_PET_SPECIES, isPetSpecies, normalizePetSpecies } from './species';
 export type {
   Case,
   LostCase,

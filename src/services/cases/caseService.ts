@@ -22,12 +22,26 @@ import type {
   ExploreFilters,
   CaseType,
 } from '@/types';
+import { normalizePetSpecies } from '@/types/species';
 import {
   timestampToDate,
   geoPointToCoords,
   coordsToGeoPoint,
   removeUndefined,
 } from '@/utils/firestore';
+
+function normalizePetSnapshot(snapshot: Record<string, unknown>): Case['petSnapshot'] {
+  return {
+    name: snapshot.name as string,
+    species: normalizePetSpecies(snapshot.species),
+    breed: snapshot.breed as string | undefined,
+    sex: snapshot.sex as string | undefined,
+    ageMonths: snapshot.ageMonths as number | undefined,
+    weightKg: snapshot.weightKg as number | undefined,
+    color: snapshot.color as string | undefined,
+    photoUrls: (snapshot.photoUrls as string[]) ?? [],
+  };
+}
 
 function firestoreToCase(id: string, data: Record<string, unknown>): Case {
   const base = {
@@ -36,7 +50,7 @@ function firestoreToCase(id: string, data: Record<string, unknown>): Case {
     ownerId: data.ownerId as string,
     petId: data.petId as string | undefined,
     organizationId: data.organizationId as string | undefined,
-    petSnapshot: data.petSnapshot as Case['petSnapshot'],
+    petSnapshot: normalizePetSnapshot(data.petSnapshot as Record<string, unknown>),
     title: data.title as string,
     description: data.description as string,
     status: data.status as string,

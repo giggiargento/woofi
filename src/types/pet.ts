@@ -1,4 +1,9 @@
-export type Species = 'dog' | 'cat' | 'rabbit' | 'bird' | 'other';
+import type { PetSpecies } from './species';
+
+/** @deprecated Use PetSpecies from '@/types/species' */
+export type Species = PetSpecies;
+
+export type { PetSpecies } from './species';
 export type Sex = 'male' | 'female' | 'unknown';
 export type PetVisibility = 'private';
 export type PetStatus = 'safe' | 'lost';
@@ -26,7 +31,7 @@ export interface Pet {
   ownerId: string;
   visibility: PetVisibility;
   name: string;
-  species: Species;
+  species: PetSpecies;
   breed?: string;
   sex: Sex;
   birthDate?: Date;
@@ -51,7 +56,7 @@ export interface Pet {
 
 export interface CreatePetInput {
   name: string;
-  species: Species;
+  species: PetSpecies;
   breed?: string;
   sex: Sex;
   birthDate?: Date;

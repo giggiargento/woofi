@@ -40,7 +40,16 @@ export const FIRESTORE_COLLECTIONS = {
 } as const;
 
 export const CASE_TYPES = ['lost', 'found', 'adoption', 'transit'] as const;
-export const SPECIES = ['dog', 'cat', 'rabbit', 'bird', 'other'] as const;
+
+export {
+  PET_SPECIES,
+  DEFAULT_PET_SPECIES,
+  type PetSpecies,
+} from '@/types/species';
+
+/** @deprecated Use PET_SPECIES */
+export { PET_SPECIES as SPECIES } from '@/types/species';
+
 export const SEX_OPTIONS = ['male', 'female', 'unknown'] as const;
 
 export const ARGENTINA_PROVINCE_IDS = [

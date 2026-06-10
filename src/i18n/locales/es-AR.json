@@ -127,10 +127,7 @@
     "reportLost": "Reportar como perdida",
     "species": {
       "dog": "Perro",
-      "cat": "Gato",
-      "rabbit": "Conejo",
-      "bird": "Ave",
-      "other": "Otro"
+      "cat": "Gato"
     },
     "sex": {
       "male": "Macho",

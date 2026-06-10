@@ -11,13 +11,13 @@ import {
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import * as ImagePicker from 'expo-image-picker';
-import { Input, PrimaryButton, PetAgeInput } from '@/components';
+import { Input, PrimaryButton, PetAgeInput, SpeciesSelector } from '@/components';
 import { parsePetAgeInput, petSchema } from '@/schemas';
 import { usePet, useUpdatePet, useAddPetPhoto } from '@/hooks/usePets';
 import { uploadFile, petPhotoPath } from '@/services/firebase/storage';
-import { SPECIES, SEX_OPTIONS } from '@/constants';
+import { DEFAULT_PET_SPECIES, SEX_OPTIONS } from '@/constants';
 import { monthsToAgeFields, MAX_PET_AGE_YEARS } from '@/utils/petAge';
-import type { Species, Sex } from '@/types';
+import type { PetSpecies, Sex } from '@/types';
 
 export default function EditPetScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -28,7 +28,7 @@ export default function EditPetScreen() {
   const addPhoto = useAddPetPhoto(id);
 
   const [name, setName] = useState('');
-  const [species, setSpecies] = useState<Species>('dog');
+  const [species, setSpecies] = useState<PetSpecies>(DEFAULT_PET_SPECIES);
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState<Sex>('unknown');
   const [color, setColor] = useState('');
@@ -160,20 +160,7 @@ export default function EditPetScreen() {
         <ScrollView className="flex-1 px-4 py-4" keyboardShouldPersistTaps="handled">
           <Input label={t('pet.form.name')} value={name} onChangeText={setName} />
 
-          <Text className="mb-2 text-sm font-medium text-text">{t('pet.form.species')}</Text>
-          <View className="mb-4 flex-row flex-wrap">
-            {SPECIES.map((s) => (
-              <TouchableOpacity
-                key={s}
-                onPress={() => setSpecies(s)}
-                className={`mb-2 mr-2 rounded-full border-2 border-border px-4 py-2 ${
-                  species === s ? 'bg-primary' : 'bg-card'
-                }`}
-              >
-                <Text className="text-sm font-medium">{t(`pet.species.${s}`)}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <SpeciesSelector value={species} onChange={setSpecies} />
 
           <Input label={t('pet.form.breed')} value={breed} onChangeText={setBreed} />
 

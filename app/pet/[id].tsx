@@ -2,7 +2,6 @@ import { View, Text, ScrollView } from 'react-native';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons';
 import {
   Card,
   Badge,
@@ -11,10 +10,13 @@ import {
   InfoChipGrid,
   LoadingSpinner,
   IconButton,
+  SpeciesBadge,
 } from '@/components';
 import { shadows } from '@/components';
 import { usePet } from '@/hooks/usePets';
 import { formatPetAge } from '@/utils/petAge';
+import { PET_SPECIES_ICONS, PET_SPECIES_PLACEHOLDER_BG } from '@/utils/speciesIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function PetDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -62,8 +64,14 @@ export default function PetDetailScreen() {
             {photo ? (
               <Image source={{ uri: photo }} className="h-72 w-full" contentFit="cover" />
             ) : (
-              <View className="h-72 w-full items-center justify-center bg-lavender">
-                <Ionicons name="paw" size={72} color="#1F2937" />
+              <View
+                className={`h-72 w-full items-center justify-center ${PET_SPECIES_PLACEHOLDER_BG[pet.species]}`}
+              >
+                <MaterialCommunityIcons
+                  name={PET_SPECIES_ICONS[pet.species]}
+                  size={72}
+                  color="#1F2937"
+                />
               </View>
             )}
           </View>
@@ -72,11 +80,15 @@ export default function PetDetailScreen() {
         <View className="px-4 pt-5">
           <Badge status={pet.status} caseType="lost" size="md" />
           <Text className="mt-4 text-3xl font-bold text-text">{pet.name}</Text>
-          <Text className="mt-1 text-base text-muted">
-            {t(`pet.species.${pet.species}`)}
-            {pet.breed ? ` · ${pet.breed}` : ''}
-            {pet.sex ? ` · ${t(`pet.sex.${pet.sex}`)}` : ''}
-          </Text>
+          <View className="mt-2 flex-row flex-wrap items-center gap-2">
+            <SpeciesBadge species={pet.species} size="md" />
+            {pet.breed ? (
+              <Text className="text-base text-muted">{pet.breed}</Text>
+            ) : null}
+            {pet.sex ? (
+              <Text className="text-base text-muted">· {t(`pet.sex.${pet.sex}`)}</Text>
+            ) : null}
+          </View>
 
           <InfoChipGrid>
             {pet.ageMonths ? (

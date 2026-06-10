@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
+import { SpeciesBadge } from './SpeciesSelector';
 import { shadows } from './shadows';
+import { PET_SPECIES_ICONS, PET_SPECIES_PLACEHOLDER_BG } from '@/utils/speciesIcons';
 import type { Pet } from '@/types';
 
 interface PetCardProps {
@@ -30,11 +32,18 @@ export function PetCard({ pet, onPress, compact = false }: PetCardProps) {
             />
           ) : (
             <View
-              className={`w-full items-center justify-center bg-lavender ${compact ? 'h-32' : 'h-44'}`}
+              className={`w-full items-center justify-center ${PET_SPECIES_PLACEHOLDER_BG[pet.species]} ${compact ? 'h-32' : 'h-44'}`}
             >
-              <Ionicons name="paw" size={compact ? 36 : 52} color="#1F2937" />
+              <MaterialCommunityIcons
+                name={PET_SPECIES_ICONS[pet.species]}
+                size={compact ? 40 : 56}
+                color="#1F2937"
+              />
             </View>
           )}
+          <View className="absolute left-3 top-3">
+            <SpeciesBadge species={pet.species} />
+          </View>
           <View className="absolute right-3 top-3">
             <View className="rounded-full border-2 border-border bg-card px-3 py-1.5">
               <Text className="text-xs font-bold text-text">
@@ -44,10 +53,7 @@ export function PetCard({ pet, onPress, compact = false }: PetCardProps) {
           </View>
         </View>
         <View className="p-4">
-          <Text className="text-xs font-semibold uppercase tracking-wide text-muted">
-            {t(`pet.species.${pet.species}`)}
-          </Text>
-          <Text className="mt-0.5 text-lg font-bold text-text">{pet.name}</Text>
+          <Text className="text-lg font-bold text-text">{pet.name}</Text>
           {pet.breed ? (
             <Text className="mt-1 text-sm text-muted" numberOfLines={1}>
               {pet.breed}

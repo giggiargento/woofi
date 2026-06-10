@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Input, PrimaryButton } from '@/components';
+import { Input, PrimaryButton, SpeciesSelector } from '@/components';
 import { useCreateCase } from '@/hooks/useCases';
-import { DEFAULT_PROVINCE_ID, SPECIES } from '@/constants';
+import { DEFAULT_PROVINCE_ID, DEFAULT_PET_SPECIES } from '@/constants';
 import { provinceLabel } from '@/i18n/provinces';
 import { getCurrentLocation, DEFAULT_LOCATION } from '@/utils/location';
-import type { CreateAdoptionCaseInput, Species } from '@/types';
+import type { CreateAdoptionCaseInput, PetSpecies } from '@/types';
 
 export default function CreateAdoptionCaseScreen() {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export default function CreateAdoptionCaseScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [petName, setPetName] = useState('');
-  const [species, setSpecies] = useState<Species>('dog');
+  const [species, setSpecies] = useState<PetSpecies>(DEFAULT_PET_SPECIES);
   const [city, setCity] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [phone, setPhone] = useState('');
@@ -82,6 +82,7 @@ export default function CreateAdoptionCaseScreen() {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-background">
         <ScrollView className="flex-1 px-4 py-4" keyboardShouldPersistTaps="handled">
           <Input label={t('pet.form.name')} value={petName} onChangeText={setPetName} />
+          <SpeciesSelector value={species} onChange={setSpecies} />
           <Input label={t('create.caseTitle')} value={title} onChangeText={setTitle} />
           <Input label={t('case.description')} value={description} onChangeText={setDescription} multiline />
           <Input label={t('explore.city')} value={city} onChangeText={setCity} />

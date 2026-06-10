@@ -15,6 +15,7 @@ import {
 import { db, isFirebaseConfigured } from '@/services/firebase/app';
 import { FIRESTORE_COLLECTIONS } from '@/constants';
 import type { Pet, CreatePetInput, UpdatePetInput } from '@/types';
+import { normalizePetSpecies } from '@/types/species';
 import {
   timestampToDate,
   removeUndefined,
@@ -35,7 +36,7 @@ function firestoreToPet(id: string, data: Record<string, unknown>): Pet {
     ownerId: data.ownerId as string,
     visibility: 'private',
     name: data.name as string,
-    species: data.species as Pet['species'],
+    species: normalizePetSpecies(data.species),
     breed: data.breed as string | undefined,
     sex: data.sex as Pet['sex'],
     birthDate: timestampToDate(data.birthDate as Timestamp),

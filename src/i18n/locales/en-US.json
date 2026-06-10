@@ -127,10 +127,7 @@
     "reportLost": "Report as lost",
     "species": {
       "dog": "Dog",
-      "cat": "Cat",
-      "rabbit": "Rabbit",
-      "bird": "Bird",
-      "other": "Other"
+      "cat": "Cat"
     },
     "sex": {
       "male": "Male",
