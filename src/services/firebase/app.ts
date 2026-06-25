@@ -21,14 +21,14 @@ if (isFirebaseConfigured()) {
     storage = getStorage(app);
 
     if (__DEV__ && Platform.OS !== 'web') {
-      console.info('[WUFFI] Firebase initialized for', Platform.OS);
+      console.info('[WOOFI] Firebase initialized for', Platform.OS);
     }
   } catch (error) {
     initError = error instanceof Error ? error.message : 'Unknown Firebase init error';
-    console.error('[WUFFI] Firebase initialization failed:', initError);
+    console.error('[WOOFI] Firebase initialization failed:', initError);
   }
 } else {
-  console.warn('[WUFFI] Firebase not configured. Add EXPO_PUBLIC_FIREBASE_* to .env');
+  console.warn('[WOOFI] Firebase not configured. Add EXPO_PUBLIC_FIREBASE_* to .env');
 }
 
 export { app, auth, db, storage, initError, firebaseConfig };

@@ -53,7 +53,7 @@ export default function CaseDetailScreen() {
   const handleShare = async () => {
     await Share.share({
       message: t('case.shareMessage', { title: caseItem.title, id: caseItem.id }),
-      url: `wuffi://case/${caseItem.id}`,
+      url: `woofi://case/${caseItem.id}`,
     });
   };
 

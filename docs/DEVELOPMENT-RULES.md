@@ -1,4 +1,4 @@
-# WUFFI — Reglas de desarrollo
+# WOOFI — Reglas de desarrollo
 
 ## Localización (obligatorio)
 
@@ -104,7 +104,7 @@ No hardcodear texto temporal. Agregar la key a ambos JSON. Solo si está bloquea
 
 ## Git — autor de commits (obligatorio en este repo)
 
-Todos los commits de WUFFI deben usar **solo** la cuenta `giggiargento`:
+Todos los commits de WOOFI deben usar **solo** la cuenta `giggiargento`:
 
 | Campo | Valor |
 |-------|--------|

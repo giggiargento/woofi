@@ -1,4 +1,4 @@
-# WUFFI
+# WOOFI
 
 Aplicación móvil para registro personal de mascotas y exploración pública de casos (perdidas, encontradas, adopción y tránsito).
 
@@ -69,4 +69,4 @@ npm start
 
 ## Documentación
 
-Ver [docs/WUFFI-ARCHITECTURE-ROADMAP.md](docs/WUFFI-ARCHITECTURE-ROADMAP.md)
+Ver [docs/WOOFI-ARCHITECTURE-ROADMAP.md](docs/WOOFI-ARCHITECTURE-ROADMAP.md)

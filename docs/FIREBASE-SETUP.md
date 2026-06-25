@@ -1,4 +1,4 @@
-# WUFFI — Configuración Firebase
+# WOOFI — Configuración Firebase
 
 Guía paso a paso para conectar Firebase real (sin mock auth).
 
@@ -13,8 +13,8 @@ npx -y firebase-tools@latest login
 **Opción A — Crear proyecto nuevo:**
 
 ```bash
-npx -y firebase-tools@latest projects:create wuffi-app-ar --display-name "WUFFI"
-npx -y firebase-tools@latest use wuffi-app-ar
+npx -y firebase-tools@latest projects:create woofi-app-ar --display-name "WOOFI"
+npx -y firebase-tools@latest use woofi-app-ar
 ```
 
 **Opción B — Proyecto existente:**
@@ -28,13 +28,13 @@ Actualizá `.firebaserc` con el mismo `project_id`.
 ## 3. Registrar app Web en Firebase
 
 ```bash
-npx -y firebase-tools@latest apps:create WEB "WUFFI Web" --project wuffi-app-ar
+npx -y firebase-tools@latest apps:create WEB "WOOFI Web" --project woofi-app-ar
 ```
 
 ## 4. Obtener credenciales (SDK config)
 
 ```bash
-npx -y firebase-tools@latest apps:sdkconfig WEB --project wuffi-app-ar
+npx -y firebase-tools@latest apps:sdkconfig WEB --project woofi-app-ar
 ```
 
 Copiá la salida JSON al archivo `.env`:
@@ -65,7 +65,7 @@ Ya está en `firebase.json`. Después de deploy:
 
 ### Firestore
 ```bash
-npx -y firebase-tools@latest init firestore --project wuffi-app-ar
+npx -y firebase-tools@latest init firestore --project woofi-app-ar
 ```
 Región recomendada: **southamerica-east1** (São Paulo, cercana a Argentina).
 
@@ -75,7 +75,7 @@ Se habilita al desplegar reglas por primera vez.
 ## 6. Desplegar reglas e índices
 
 ```bash
-npx -y firebase-tools@latest deploy --only auth,firestore,storage --project wuffi-app-ar
+npx -y firebase-tools@latest deploy --only auth,firestore,storage --project woofi-app-ar
 ```
 
 ## 7. Arrancar la app
@@ -101,10 +101,10 @@ Verificá en Firebase Console → Authentication → Users.
 Para builds nativos, registrá también:
 
 ```bash
-npx -y firebase-tools@latest apps:create ANDROID --package-name com.wuffi.app --project wuffi-app-ar
-npx -y firebase-tools@latest apps:create IOS --bundle-id com.wuffi.app --project wuffi-app-ar
-npx -y firebase-tools@latest apps:sdkconfig ANDROID --project wuffi-app-ar > google-services.json
-npx -y firebase-tools@latest apps:sdkconfig IOS --project wuffi-app-ar > GoogleService-Info.plist
+npx -y firebase-tools@latest apps:create ANDROID --package-name com.woofi.app --project woofi-app-ar
+npx -y firebase-tools@latest apps:create IOS --bundle-id com.woofi.app --project woofi-app-ar
+npx -y firebase-tools@latest apps:sdkconfig ANDROID --project woofi-app-ar > google-services.json
+npx -y firebase-tools@latest apps:sdkconfig IOS --project woofi-app-ar > GoogleService-Info.plist
 ```
 
 Estos archivos están en `.gitignore`.

@@ -1,4 +1,4 @@
-# WUFFI MVP Functionality Audit
+# WOOFI MVP Functionality Audit
 
 **Date:** June 2026  
 **Scope:** All user-facing flows in `app/`, data layer in `src/services/` and `src/hooks/`, Firebase rules/indexes, validation schemas  
@@ -9,7 +9,7 @@
 
 ## Executive summary
 
-WUFFI is a **real Firebase-backed MVP**, not a mock prototype. Core paths — email auth, personal pet notebook, public case publishing, explore/search/filters, case detail with contact actions, and favorites — are wired to Firestore and (partially) Storage.
+WOOFI is a **real Firebase-backed MVP**, not a mock prototype. Core paths — email auth, personal pet notebook, public case publishing, explore/search/filters, case detail with contact actions, and favorites — are wired to Firestore and (partially) Storage.
 
 There is **no mock or seed data** in application code. When Firebase env vars are missing, reads return empty arrays and writes throw; this is intentional graceful degradation.
 

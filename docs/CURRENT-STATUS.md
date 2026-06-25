@@ -1,7 +1,7 @@
-# WUFFI Current Status
+# WOOFI Current Status
 
 **Last updated:** June 2026  
-**Repository:** https://github.com/giggiargento/wuffi  
+**Repository:** https://github.com/giggiargento/woofi  
 **Firebase project:** `wuffi-d19e9`  
 **Runtime:** Expo Go (no development build configured)
 
@@ -11,7 +11,7 @@
 
 ### Purpose of the application
 
-**WUFFI** is a mobile app for pet owners and the community around them. It combines:
+**WOOFI** is a mobile app for pet owners and the community around them. It combines:
 
 1. **Personal pet notebook** — Private digital profiles for the user's pets (health notes, photos, status).
 2. **Public explorer** — Community posts for lost pets, found pets, adoptions, and temporary transit care.
@@ -287,7 +287,7 @@ Summary — full detail in `docs/DEVELOPMENT-RULES.md`.
 ### Install
 
 ```bash
-cd WUFFI
+cd WOOFI
 npm install
 cp .env.example .env   # then fill values
 npm run check:firebase
@@ -352,6 +352,6 @@ Prioritized for upcoming sessions:
 | Document | Purpose |
 |----------|---------|
 | `docs/PROJECT-HANDOFF.md` | Quick onboarding for new developers / AI |
-| `docs/WUFFI-ARCHITECTURE-ROADMAP.md` | Full product & Firestore design |
+| `docs/WOOFI-ARCHITECTURE-ROADMAP.md` | Full product & Firestore design |
 | `docs/FIREBASE-SETUP.md` | Firebase Console + CLI setup |
 | `docs/DEVELOPMENT-RULES.md` | i18n, git author, coding rules |

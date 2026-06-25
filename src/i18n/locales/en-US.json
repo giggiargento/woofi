@@ -37,7 +37,7 @@
     "resetSent": "We sent you an email to reset your password",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
-    "welcomeTitle": "Welcome to WUFFI!",
+    "welcomeTitle": "Welcome to WOOFI!",
     "welcomeSubtitle": "Your digital pet notebook and caring community",
     "loginError": "Could not sign in. Check your credentials.",
     "registerError": "Could not create your account.",
@@ -119,7 +119,7 @@
     "favorite": "Save",
     "unfavorite": "Remove from saved",
     "sightingCaseId": "Case: {{id}}",
-    "shareMessage": "WUFFI: {{title}}\nwuffi://case/{{id}}"
+    "shareMessage": "WOOFI: {{title}}\nwoofi://case/{{id}}"
   },
   "pet": {
     "title": "Pet",

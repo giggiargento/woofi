@@ -41,13 +41,13 @@ const config = {
 };
 
 const suffix = Date.now();
-const email = `wuffi-verify-${suffix}@mailinator.com`;
-const password = `WuffiTest!${suffix}`;
+const email = `woofi-verify-${suffix}@mailinator.com`;
+const password = `WoofiTest!${suffix}`;
 
 async function main() {
   console.log('🔥 Firebase verification — project:', config.projectId);
 
-  const app = initializeApp(config, 'wuffi-verify');
+  const app = initializeApp(config, 'woofi-verify');
   const auth = getAuth(app);
   const db = getFirestore(app);
 
@@ -66,7 +66,7 @@ async function main() {
   await setDoc(userRef, {
     uid,
     email,
-    displayName: 'WUFFI Verify',
+    displayName: 'WOOFI Verify',
     locale: 'es-AR',
     role: 'user',
     notificationSettings: {

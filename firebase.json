@@ -3,8 +3,8 @@
     "providers": {
       "emailPassword": true,
       "googleSignIn": {
-        "oAuthBrandDisplayName": "WUFFI",
-        "supportEmail": "hello@wuffi.app",
+        "oAuthBrandDisplayName": "WOOFI",
+        "supportEmail": "hello@woofi.app",
         "authorizedDomains": ["localhost"]
       }
     }

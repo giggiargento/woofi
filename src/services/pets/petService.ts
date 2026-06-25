@@ -18,7 +18,7 @@ import { normalizePetSpecies } from '@/types/species';
 import {
   timestampToDate,
   removeUndefined,
-  generateWuffiId,
+  generateWoofiId,
 } from '@/utils/firestore';
 
 function firestoreToPet(id: string, data: Record<string, unknown>): Pet {
@@ -50,7 +50,7 @@ function firestoreToPet(id: string, data: Record<string, unknown>): Pet {
     vetContact: data.vetContact as Pet['vetContact'],
     microchipId: data.microchipId as string | undefined,
     customId: data.customId as string | undefined,
-    wuffiId: data.wuffiId as string,
+    woofiId: (data.woofiId ?? data.wuffiId) as string,
     emergencyContact: data.emergencyContact as Pet['emergencyContact'],
     status: (data.status as Pet['status']) ?? 'safe',
     activeLostCaseId: data.activeLostCaseId as string | undefined,
@@ -99,7 +99,7 @@ export async function createPet(
     medicalNotes: input.medicalNotes,
     allergies: input.allergies,
     microchipId: input.microchipId,
-    wuffiId: generateWuffiId(input.name),
+    woofiId: generateWoofiId(input.name),
     status: 'safe',
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),

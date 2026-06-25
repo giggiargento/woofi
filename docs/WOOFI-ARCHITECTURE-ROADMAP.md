@@ -1,4 +1,4 @@
-# WUFFI — Arquitectura y Roadmap
+# WOOFI — Arquitectura y Roadmap
 
 **Arquitectura, esquema Firestore y roadmap de implementación**
 
@@ -25,7 +25,7 @@ Documento de diseño previo a la implementación · Versión 1.0 · Junio 2026 �
 
 ## 1. Visión del producto
 
-**WUFFI** es una aplicación móvil con dos propósitos principales:
+**WOOFI** es una aplicación móvil con dos propósitos principales:
 
 1. **Registro personal de mascotas** — Cuaderno digital privado para que cada usuario gestione el perfil de sus mascotas.
 2. **Explorador público de mascotas** — Plataforma para publicar, explorar y colaborar con casos de mascotas perdidas, encontradas y en adopción.
@@ -83,7 +83,7 @@ Publicable por usuarios, rescatistas, refugios u ONGs.
 ### 2.1 Jerarquía de contenido
 
 ```
-WUFFI
+WOOFI
 ├── Autenticación
 │   ├── Inicio de sesión (email, Google, Apple*)
 │   ├── Registro
@@ -196,7 +196,7 @@ Detalle de mascota personal → Pestaña QR → Configurar campos visibles públ
 ### 3.1 Estructura de carpetas propuesta
 
 ```
-wuffi/
+woofi/
 ├── app/
 │   ├── _layout.tsx                 # Root: providers, auth gate, i18n
 │   ├── index.tsx                   # Redirect: auth → tabs | login
@@ -244,7 +244,7 @@ wuffi/
 │   │   ├── notifications.tsx
 │   │   └── account.tsx
 │   │
-│   └── qr/[wuffiId].tsx            # Public QR landing
+│   └── qr/[woofiId].tsx            # Public QR landing
 │
 ├── src/
 │   ├── components/                 # Design system
@@ -285,11 +285,11 @@ wuffi/
 
 | Deep link | Destino |
 |-----------|---------|
-| `wuffi://case/{id}` | Detalle de caso público |
-| `wuffi://pet/{id}` | Detalle de mascota (requiere auth + ownership) |
-| `wuffi://qr/{wuffiId}` | Perfil QR público |
-| `wuffi://explore?type=lost` | Explorador con filtro |
-| `wuffi://create/lost?petId={id}` | Crear caso perdido desde pet |
+| `woofi://case/{id}` | Detalle de caso público |
+| `woofi://pet/{id}` | Detalle de mascota (requiere auth + ownership) |
+| `woofi://qr/{woofiId}` | Perfil QR público |
+| `woofi://explore?type=lost` | Explorador con filtro |
+| `woofi://create/lost?petId={id}` | Crear caso perdido desde pet |
 
 ### 3.4 Flujo de navegación (resumen)
 
@@ -301,7 +301,7 @@ Login/Register → (tabs)
   Explore → case/[id] → case/[id]/sighting
   Explore → explore/map
   Profile → favorites, settings/*, organization/[id]
-  Pet detail → QR tab → qr/[wuffiId] (público)
+  Pet detail → QR tab → qr/[woofiId] (público)
 ```
 
 ---
@@ -320,7 +320,7 @@ Login/Register → (tabs)
 | `notifications` | auto | Notificaciones in-app |
 | `organizations` | auto | ONGs / refugios |
 | `documents` | auto | Metadatos de archivos (Storage) |
-| `qrProfiles` | `{wuffiId}` | Perfil QR público |
+| `qrProfiles` | `{woofiId}` | Perfil QR público |
 | `reports` | auto | Denuncias / moderación |
 
 **Subcolección recomendada:** `cases/{caseId}/updates` — historial de actualizaciones de un caso.
@@ -389,7 +389,7 @@ Login/Register → (tabs)
 
   microchipId?: string
   customId?: string
-  wuffiId: string                   // slug único para QR
+  woofiId: string                   // slug único para QR
 
   emergencyContact?: {
     name: string
@@ -605,11 +605,11 @@ Login/Register → (tabs)
 }
 ```
 
-### 4.11 Documento: qrProfiles/{wuffiId}
+### 4.11 Documento: qrProfiles/{woofiId}
 
 ```typescript
 {
-  wuffiId: string
+  woofiId: string
   petId: string
   ownerId: string
   publicFields: {
@@ -921,7 +921,7 @@ Bottom sheet en marker: foto, nombre, estado, distancia, botón principal.
 ### 9.2 Archivos de configuración (post-aprobación)
 
 ```
-wuffi/
+woofi/
 ├── google-services.json              # Android
 ├── GoogleService-Info.plist          # iOS
 ├── .env.example
@@ -996,7 +996,7 @@ EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=
 
 | # | Decisión | Propuesta | Alternativa |
 |---|----------|-----------|-------------|
-| 1 | Ubicación del código | Carpeta/repo `wuffi/` separado de Mochileaf | Monorepo |
+| 1 | Ubicación del código | Carpeta/repo `woofi/` separado de Mochileaf | Monorepo |
 | 2 | Login social MVP | Email + Google | + Apple desde día 1 |
 | 3 | Geo queries | geohash + índices compuestos | GeoFirestore extension |
 | 4 | QR público | Deep link + página web futura | Solo in-app |
@@ -1039,6 +1039,6 @@ Marcar antes de iniciar implementación:
 
 ---
 
-**WUFFI · Arquitectura v1.0 · Junio 2026**
+**WOOFI · Arquitectura v1.0 · Junio 2026**
 
 Documento generado para revisión y aprobación antes de la implementación.

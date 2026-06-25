@@ -11,12 +11,12 @@ const firebaseExtra = {
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'WUFFI',
-  slug: 'wuffi',
+  name: 'WOOFI',
+  slug: 'woofi',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
-  scheme: 'wuffi',
+  scheme: 'woofi',
   userInterfaceStyle: 'light',
   newArchEnabled: true,
   splash: {
@@ -26,7 +26,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.wuffi.app',
+    bundleIdentifier: 'com.woofi.app',
     config: {
       googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
     },
@@ -36,7 +36,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './assets/android-icon-foreground.png',
       backgroundColor: '#FFF4EA',
     },
-    package: 'com.wuffi.app',
+    package: 'com.woofi.app',
     config: {
       googleMaps: {
         apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -55,14 +55,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'expo-location',
       {
         locationAlwaysAndWhenInUsePermission:
-          'WUFFI necesita tu ubicación para mostrar alertas cercanas y publicar casos.',
+          'WOOFI necesita tu ubicación para mostrar alertas cercanas y publicar casos.',
       },
     ],
     [
       'expo-image-picker',
       {
         photosPermission:
-          'WUFFI necesita acceso a tus fotos para subir imágenes de mascotas.',
+          'WOOFI necesita acceso a tus fotos para subir imágenes de mascotas.',
       },
     ],
   ],
@@ -74,7 +74,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       origin: false,
     },
     eas: {
-      projectId: 'wuffi-app',
+      projectId: 'woofi-app',
     },
     firebase: firebaseExtra,
   },

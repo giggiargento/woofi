@@ -1,10 +1,10 @@
-# WUFFI — Project Handoff
+# WOOFI — Project Handoff
 
 Use this document to onboard a new developer or AI assistant and continue work without re-discovering the codebase.
 
 ---
 
-## What is WUFFI?
+## What is WOOFI?
 
 Mobile app (Expo / React Native) for:
 
@@ -20,7 +20,7 @@ Mobile app (Expo / React Native) for:
 ## Repository layout
 
 ```
-WUFFI/
+WOOFI/
 ├── app/                    # Expo Router screens (file-based routing)
 │   ├── (auth)/             # login, register, forgot-password
 │   ├── (tabs)/             # home, explore, add, alerts, profile
@@ -207,7 +207,7 @@ Full prioritized list: `docs/CURRENT-STATUS.md` → *Next Recommended Tasks*.
 | File | When to read |
 |------|----------------|
 | `docs/CURRENT-STATUS.md` | Current feature matrix, bugs, run instructions |
-| `docs/WUFFI-ARCHITECTURE-ROADMAP.md` | Full product vision, Firestore schema, phases |
+| `docs/WOOFI-ARCHITECTURE-ROADMAP.md` | Full product vision, Firestore schema, phases |
 | `docs/FIREBASE-SETUP.md` | First-time Firebase setup |
 | `docs/DEVELOPMENT-RULES.md` | i18n + git + coding constraints |
 
@@ -215,9 +215,9 @@ Full prioritized list: `docs/CURRENT-STATUS.md` → *Next Recommended Tasks*.
 
 ## Contacts & repo
 
-- **GitHub:** https://github.com/giggiargento/wuffi
+- **GitHub:** https://github.com/giggiargento/woofi
 - **Firebase project:** `wuffi-d19e9`
-- **Expo slug:** `wuffi`
-- **Android package / iOS bundle:** `com.wuffi.app`
+- **Expo slug:** `woofi`
+- **Android package / iOS bundle:** `com.woofi.app`
 
 When in doubt: read `docs/CURRENT-STATUS.md`, run `npm run verify`, and follow `docs/DEVELOPMENT-RULES.md`.

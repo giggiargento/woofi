@@ -37,7 +37,7 @@
     "resetSent": "Te enviamos un correo para restablecer tu contraseña",
     "noAccount": "¿No tenés cuenta?",
     "hasAccount": "¿Ya tenés cuenta?",
-    "welcomeTitle": "¡Bienvenido a WUFFI!",
+    "welcomeTitle": "¡Bienvenido a WOOFI!",
     "welcomeSubtitle": "Tu cuaderno digital de mascotas y la comunidad que las cuida",
     "loginError": "No pudimos iniciar sesión. Revisá tus datos.",
     "registerError": "No pudimos crear tu cuenta.",
@@ -119,7 +119,7 @@
     "favorite": "Guardar",
     "unfavorite": "Quitar de guardados",
     "sightingCaseId": "Caso: {{id}}",
-    "shareMessage": "WUFFI: {{title}}\nwuffi://case/{{id}}"
+    "shareMessage": "WOOFI: {{title}}\nwoofi://case/{{id}}"
   },
   "pet": {
     "title": "Mascota",

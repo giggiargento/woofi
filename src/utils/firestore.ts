@@ -34,7 +34,7 @@ export function removeUndefined<T extends Record<string, unknown>>(obj: T): Part
   ) as Partial<T>;
 }
 
-export function generateWuffiId(name: string): string {
+export function generateWoofiId(name: string): string {
   const slug = name
     .toLowerCase()
     .normalize('NFD')

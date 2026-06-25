@@ -46,7 +46,7 @@ export interface Pet {
   vetContact?: VetContact;
   microchipId?: string;
   customId?: string;
-  wuffiId: string;
+  woofiId: string;
   emergencyContact?: EmergencyContact;
   status: PetStatus;
   activeLostCaseId?: string;

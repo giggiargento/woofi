@@ -77,7 +77,7 @@ service cloud.firestore {
       allow create: if isSignedIn() && request.resource.data.ownerId == request.auth.uid;
     }
 
-    match /qrProfiles/{wuffiId} {
+    match /qrProfiles/{woofiId} {
       allow read: if true;
       allow write: if isSignedIn() && request.resource.data.ownerId == request.auth.uid;
       allow update: if isSignedIn() && resource.data.ownerId == request.auth.uid;

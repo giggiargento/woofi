@@ -5,10 +5,10 @@ import { execFileSync } from "node:child_process";
 import { marked } from "marked";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const mdPath = join(__dirname, "WUFFI-ARCHITECTURE-ROADMAP.md");
+const mdPath = join(__dirname, "WOOFI-ARCHITECTURE-ROADMAP.md");
 const cssPath = join(__dirname, "pdf-style.css");
-const htmlPath = join(__dirname, "WUFFI-ARCHITECTURE-ROADMAP.html");
-const pdfPath = join(__dirname, "WUFFI-ARCHITECTURE-ROADMAP.pdf");
+const htmlPath = join(__dirname, "WOOFI-ARCHITECTURE-ROADMAP.html");
+const pdfPath = join(__dirname, "WOOFI-ARCHITECTURE-ROADMAP.pdf");
 
 const chromePath =
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
@@ -24,7 +24,7 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WUFFI — Arquitectura y Roadmap</title>
+  <title>WOOFI — Arquitectura y Roadmap</title>
   <style>${css}</style>
 </head>
 <body>
