@@ -47,8 +47,12 @@ export default function HomeScreen() {
   const regularActions = QUICK_ACTIONS.filter((a) => !a.featured);
 
   return (
-    <SafeAreaView className="flex-1 bg-background" edges={['top']}>
-      <ScrollView className="flex-1 px-4" contentContainerClassName="pb-32" showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 overflow-x-hidden bg-background" edges={['top']}>
+      <ScrollView
+        className="flex-1 px-4"
+        contentContainerClassName="pb-32"
+        showsVerticalScrollIndicator={false}
+      >
         <ScreenHeader
           title={t('home.greeting', { name })}
           subtitle={location}
@@ -95,7 +99,12 @@ export default function HomeScreen() {
             onPress={() => router.push(featuredAction.route as never)}
           />
         ) : null}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-8">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          className="-mx-4 mb-8"
+          contentContainerClassName="px-4"
+        >
           {regularActions.map((action) => (
             <QuickActionCard
               key={action.key}

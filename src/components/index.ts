@@ -21,3 +21,4 @@ export { SpeciesSelector, SpeciesBadge } from './ui/SpeciesSelector';
 export { ConfirmDialog, InlineError } from './ui/ConfirmDialog';
 export { theme } from './ui/theme';
 export { shadows } from './ui/shadows';
+export { WebShell, useIsWideWeb, WEB_SHELL_BREAKPOINT } from './layout/WebShell';
