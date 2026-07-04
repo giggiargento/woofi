@@ -18,3 +18,15 @@
 ## Archivos fuente (referencia)
 
 Los `woofi (1).svg` … `woofi (8).svg` son exports originales con fondo. No usarlos directamente en la app.
+
+## PNG nativos (Expo — pendiente generar)
+
+Expo requiere PNG; exportar desde los SVG oficiales. Spec: `docs/brand/APP-ICON-SPLASH.md`
+
+| PNG | Fuente | Tamaño |
+|-----|--------|--------|
+| `assets/icon.png` | `favicon.svg` | 1024 × 1024 |
+| `assets/android-icon-foreground.png` | `favicon.svg` | 1024 × 1024 |
+| `assets/splash-icon.png` | `logo-wordmark.svg` | 512 × 512 (alpha) |
+
+Opcional: copias en `assets/brand/exports/` cuando existan.

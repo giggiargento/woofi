@@ -70,6 +70,20 @@ Espacio cuadrado / ≤48 px / sin texto        →  favicon.svg
 
 No usar el wordmark como favicon (ilegible). No usar el favicon como logo principal en pantallas de auth.
 
+### 2.4 App icon & splash (nativo)
+
+Expo/EAS requieren **PNG** para launcher y splash; los SVG oficiales son la fuente de verdad.
+
+| Pieza | SVG fuente | PNG destino (Dev) | Tamaño |
+|-------|------------|-------------------|--------|
+| App icon iOS / universal | `favicon.svg` | `assets/icon.png` | 1024 × 1024 |
+| Android adaptive foreground | `favicon.svg` | `assets/android-icon-foreground.png` | 1024 × 1024 |
+| Splash (wordmark centrado) | `logo-wordmark.svg` | `assets/splash-icon.png` | 512 × 512 (transparente) |
+
+Fondo splash / adaptive: crema `#FFF6E5` o `#fff2d0` — no legacy `#FFF4EA`.
+
+**Spec completa (export, safe zone Android, herramientas):** [`docs/brand/APP-ICON-SPLASH.md`](APP-ICON-SPLASH.md)
+
 ---
 
 ## 3. Paleta de color
@@ -172,10 +186,11 @@ Variantes **no aprobadas** sin revisión Brand: gradientes, outline blanco grues
 |--------|--------|
 | **Brand** | Mantener SVGs en `assets/brand/`; actualizar este doc si cambian colores o assets |
 | **UX/UI** | Tokens hacia §3.2; componentes sin hardcode `#F9A23B`; importar logos oficiales en headers/auth |
-| **Dev** | Referenciar assets vía imports estáticos; favicon en `app.config.ts` / web meta según spec UX |
+| **Dev** | PNG nativos según `APP-ICON-SPLASH.md`; favicon web ya en `app.config.ts`; alinear splash/adaptive bg a §3.2 |
 
 **Archivos de referencia cruzada**
 
+- App icon & splash: `docs/brand/APP-ICON-SPLASH.md`
 - Assets: `assets/brand/README.md`
 - Tokens UX target: `docs/agents/UX-AGENT.md`
 - Auditoría técnica: `docs/design/DESIGN-SYSTEM-AUDIT.md`
@@ -192,6 +207,7 @@ Antes de publicar una pantalla o pieza con marca:
 - [ ] ¿Fondo crema/cálido, no gris frío?
 - [ ] ¿Texto UI en `es-AR` vía i18n, tono §6?
 - [ ] ¿Colores UI alineados a §3.2 (no legacy `#F9A23B` en piezas nuevas)?
+- [ ] ¿Icon/splash nativos generados desde SVG oficial (§2.4 / `APP-ICON-SPLASH.md`)?
 
 ---
 
@@ -199,4 +215,5 @@ Antes de publicar una pantalla o pieza con marca:
 
 | Fecha | Cambio |
 |-------|--------|
+| 2026-07 | §2.4 app icon & splash + enlace a `APP-ICON-SPLASH.md` |
 | 2026-07 | Creación inicial — wordmark + favicon oficiales, paleta logo, alineación UX, tono es-AR |
