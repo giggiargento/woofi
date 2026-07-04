@@ -1,3 +1,15 @@
+/** Brand asset paths (relative to project root) */
+export const BRAND_PATHS = {
+  logoWordmark: 'assets/brand/logo-wordmark.svg',
+  favicon: 'assets/brand/favicon.svg',
+} as const;
+
+export const BRAND_COLORS = {
+  orange: '#ffb850',
+  cream: '#fff2d0',
+  brown: '#5e4432',
+} as const;
+
 export const COLORS = {
   primary: '#F9A23B',
   background: '#FFF4EA',

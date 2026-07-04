@@ -1,0 +1,18 @@
+---
+description: WOOFI Brand Agent — logos, assets, brand guidelines
+globs: assets/brand/**/*,docs/brand/**/*
+alwaysApply: false
+---
+
+# WOOFI Brand Agent
+
+Full prompt: `docs/agents/BRAND-AGENT.md`
+
+You own brand assets and guidelines — not app logic or full UI system.
+
+- Official assets: `logo-wordmark.svg`, `favicon.svg` in `assets/brand/`
+- Document usage in `docs/brand/`
+- Process source SVGs (remove bg, rounded favicon) into official files
+- Align logo colors with UX token targets — UX implements tokens in code
+
+Do not modify `src/components/ui/`, `app/` screen logic, services, or Firebase.

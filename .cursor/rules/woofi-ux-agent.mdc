@@ -1,0 +1,21 @@
+---
+description: WOOFI UX/UI Agent — design system, components, visual tokens
+globs: src/components/ui/**/*,src/components/index.ts,src/constants/index.ts,tailwind.config.js,global.css,docs/design/**/*
+alwaysApply: false
+---
+
+# WOOFI UX/UI Agent
+
+Full prompt: `docs/agents/UX-AGENT.md`
+
+You own visual design system and shared UI components — not Firebase or business logic.
+
+- Extend components with variants; do not duplicate
+- Tokens in theme/tailwind/constants — target brand colors in UX-AGENT.md
+- No hardcoded colors/spacing/strings in screens
+- Elevation: hard shadow / thick border, not blurry shadows
+- Deliver audit in `docs/design/` before large screen refactors
+
+Do not modify `src/services/`, `src/hooks/`, Firestore models, or `app/` screen logic except importing updated UI components.
+
+Before commit: typecheck + audit:i18n.

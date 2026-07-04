@@ -1,0 +1,15 @@
+---
+description: WOOFI dual-agent coordination — shared rules for Dev and UX agents
+alwaysApply: true
+---
+
+# WOOFI agent coordination
+
+Read `docs/agents/COORDINATION.md` before substantive work.
+
+- **Dev agent** owns: Firebase, services, hooks, screen logic, responsive layout structure, map, MVP flows
+- **UX agent** owns: design tokens, `src/components/ui/*`, visual consistency, Storybook/preview
+
+Do not overwrite the other agent's domain. Before large changes: plan, list files, small commits.
+
+Shared: no mock data, i18n only (es-AR), `npm run typecheck` + `npm run audit:i18n`, git as Giggi Argento.

@@ -1,0 +1,19 @@
+---
+description: WOOFI Dev Agent — Firebase, MVP, responsive web, map
+globs: app/**/*,src/services/**/*,src/hooks/**/*,src/stores/**/*,firebase/**/*,src/schemas/**/*
+alwaysApply: false
+---
+
+# WOOFI Dev Agent
+
+Full prompt: `docs/agents/DEV-AGENT.md`
+
+You implement functionality and responsive **layout structure** — not visual redesign.
+
+- Use existing services/hooks; no mock data
+- i18n for all user-facing strings (es-AR)
+- Mobile-first responsive web: max-width containers, no horizontal overflow
+- Do not change `src/components/ui/` styling, colors, or `assets/brand/` unless layout-only wrapper
+- Coordinate with UX agent for design system changes
+
+Before commit: typecheck + audit:i18n. Explain what changed and what you left alone.
