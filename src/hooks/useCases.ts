@@ -6,8 +6,10 @@ import {
   createCase,
   updateCaseStatus,
   getRecentCasesNearby,
+  caseMatchesExploreFilters,
 } from '@/services/cases/caseService';
-import type { CreateCaseInput, ExploreFilters } from '@/types';
+import { linkPetToLostCase } from '@/services/pets/petService';
+import type { CreateCaseInput, ExploreFilters, Case } from '@/types';
 import { useAuthStore } from '@/stores/authStore';
 import { useExploreStore } from '@/stores/exploreStore';
 
@@ -58,14 +60,38 @@ export function useCreateCase() {
   const ownerId = useAuthStore((s) => s.firebaseUser?.uid);
 
   return useMutation({
-    mutationFn: (input: CreateCaseInput) => {
+    mutationFn: async (input: CreateCaseInput) => {
       if (!ownerId) throw new Error('Not authenticated');
-      return createCase(ownerId, input);
+      const created = await createCase(ownerId, input);
+      if (input.caseType === 'lost' && input.petId) {
+        await linkPetToLostCase(input.petId, created.id, ownerId);
+      }
+      return created;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['exploreCases'] });
-      queryClient.invalidateQueries({ queryKey: ['myCases', ownerId] });
-      queryClient.invalidateQueries({ queryKey: ['nearbyCases'] });
+    onSuccess: (created, input) => {
+      queryClient.setQueriesData<Case[]>(
+        {
+          queryKey: ['exploreCases'],
+          predicate: (query) => {
+            const filters = query.queryKey[1] as ExploreFilters | undefined;
+            return caseMatchesExploreFilters(created, filters ?? {});
+          },
+        },
+        (old) => {
+          if (!old) return [created];
+          if (old.some((item) => item.id === created.id)) return old;
+          return [created, ...old].slice(0, 50);
+        }
+      );
+
+      void queryClient.refetchQueries({ queryKey: ['exploreCases'] });
+      void queryClient.refetchQueries({ queryKey: ['myCases', ownerId] });
+      void queryClient.refetchQueries({ queryKey: ['nearbyCases'] });
+
+      if (input.caseType === 'lost' && input.petId) {
+        queryClient.invalidateQueries({ queryKey: ['pet', input.petId] });
+        queryClient.invalidateQueries({ queryKey: ['pets', ownerId] });
+      }
     },
   });
 }

@@ -9,73 +9,60 @@
 
 | Agente | Estado |
 |--------|--------|
-| 📁 Coordinación | Activo — commitea, define tareas, vos probás |
-| 💻 Dev | **TAREA A** abajo |
-| 🎨 UX | **PAUSA** — esperar tarea de pantalla concreta |
-| 🎯 Brand | **PAUSA** — guidelines listas; PNGs cuando se pida |
+| 📁 Coordinación | Activo |
+| 💻 Dev | **TAREA B** abajo |
+| 🎨 UX | **PAUSA** |
+| 🎯 Brand | **PAUSA** |
 
 ---
 
-## TAREA A — 💻 Dev (próxima)
+## TAREA B — 💻 Dev (activa)
 
-**Objetivo:** Subida de fotos de mascotas con Firebase Storage (flujo real, visible en la app).
-
-### Pre-requisito (humano, 2 min)
-
-1. [Firebase Console → Storage](https://console.firebase.google.com/project/wuffi-d19e9/storage) → **Comenzar**
-2. Avisar en chat 📁 cuando esté listo (o Dev puede asumir que ya está si deploy de rules pasa)
+**Objetivo:** Al publicar un caso "perdida" desde una mascota, actualizar el pet en Firestore.
 
 ### Hacer
 
-1. Deploy `firebase/storage.rules` cuando Storage esté habilitado
-2. Implementar subida en flujo crear/editar mascota (`app/pet/`, hooks/services existentes)
-3. Mostrar foto en `PetCard` / detalle si ya hay URL en Firestore
-4. Fallback claro si Storage no está listo (mensaje i18n, no crash)
+Cuando se publica en `app/create/lost/[step].tsx` (con `petId`):
+
+1. `pet.status` → `'lost'`
+2. `pet.activeLostCaseId` → id del caso creado
+
+Usar `petService` / hooks existentes. Sin Storage ni fotos.
 
 ### Archivos permitidos
 
-- `app/pet/**`
-- `app/create/**` (solo si toca flujo de mascota)
-- `src/services/**` (storage, pets)
+- `app/create/lost/**`
+- `src/services/pets/**`, `src/services/cases/**`
 - `src/hooks/**`
-- `firebase/storage.rules`
-- `src/i18n/locales/*.json` (keys nuevas)
-- `docs/CURRENT-STATUS.md` (una línea de estado al terminar)
+- `src/i18n/locales/*.json` (si hace falta)
 
 ### PROHIBIDO
 
-- `src/components/ui/*` (estilos)
-- `docs/brand/`, `assets/brand/`
-- `tailwind.config.js`, `src/design/tokens.js`, `theme.ts`
-- Tokens, design-preview, guidelines
+- `src/components/ui/*`, `docs/brand/`, `theme`, `tailwind`, Storage
 
 ### Al terminar
 
-```bash
-npm run typecheck && npm run audit:i18n
-```
-
-Listar archivos cambiados. **No commitear** — avisar en chat 📁.
+`npm run typecheck && npm run audit:i18n` — listar cambios — **no commitear**.
 
 ---
 
-## Cola (después de A)
+## Cola
 
-| ID | Tarea | Agente |
-|----|-------|--------|
-| B | Reportar perdida → actualizar `pet.status` + `activeLostCaseId` | Dev |
-| C | Tab Alertas — lista básica o empty state útil | Dev |
-| D | Pulir pantalla concreta post-A | UX |
+| ID | Tarea | Notas |
+|----|-------|-------|
+| A | Fotos + Storage | **Pausada** — requiere plan Blaze |
+| C | Tab Alertas | Después de B |
+| D | Pulir UI | UX, después |
 
 ---
 
-## Mensaje para pegar en 💻 Dev
+## Prompt 💻 Dev
 
 ```
-PAUSA design system / tokens / brand.
+PAUSA design system / tokens / brand / Storage.
 
-Leé @docs/agents/ACTIVE-TASK.md — TAREA A.
+Leé @docs/agents/ACTIVE-TASK.md — TAREA B.
 
-Plan primero (archivos + pasos). No codees hasta mi OK.
+Plan primero. No codees hasta mi OK.
 PROHIBIDO: src/components/ui/*, docs/brand/, theme, tailwind.
 ```

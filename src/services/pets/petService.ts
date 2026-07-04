@@ -145,3 +145,14 @@ export async function addPetPhoto(petId: string, photoUrl: string): Promise<Pet>
   if (!pet) throw new Error('Pet not found');
   return updatePet(petId, { photoUrls: [...pet.photoUrls, photoUrl] });
 }
+
+export async function linkPetToLostCase(
+  petId: string,
+  caseId: string,
+  ownerId: string
+): Promise<Pet> {
+  const pet = await getPet(petId);
+  if (!pet) throw new Error('Pet not found');
+  if (pet.ownerId !== ownerId) throw new Error('Unauthorized');
+  return updatePet(petId, { status: 'lost', activeLostCaseId: caseId });
+}

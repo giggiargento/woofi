@@ -12,6 +12,7 @@ import {
   serverTimestamp,
   Timestamp,
   GeoPoint,
+  type QueryConstraint,
 } from 'firebase/firestore';
 import { geohashForLocation } from 'geofire-common';
 import { db, isFirebaseConfigured } from '@/services/firebase/app';
@@ -214,13 +215,17 @@ export async function getCasesByOwner(ownerId: string): Promise<Case[]> {
   return snap.docs.map((d) => firestoreToCase(d.id, d.data()));
 }
 
-export async function exploreCases(
-  filters: ExploreFilters,
-  maxResults = 50
-): Promise<Case[]> {
-  if (!isFirebaseConfigured() || !db) return [];
+function isFirestoreIndexError(error: unknown): boolean {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'code' in error &&
+    (error as { code: string }).code === 'failed-precondition'
+  );
+}
 
-  const constraints = [];
+function buildExploreQueryConstraints(filters: ExploreFilters): QueryConstraint[] {
+  const constraints: QueryConstraint[] = [];
   if (filters.caseType) {
     constraints.push(where('caseType', '==', filters.caseType));
   }
@@ -230,26 +235,21 @@ export async function exploreCases(
   if (filters.province) {
     constraints.push(where('province', '==', filters.province));
   }
+  return constraints;
+}
 
-  const q = query(
-    collection(db, FIRESTORE_COLLECTIONS.cases),
-    ...constraints,
-    orderBy('createdAt', 'desc'),
-    limit(maxResults)
-  );
-
-  const snap = await getDocs(q);
-  let cases = snap.docs.map((d) => firestoreToCase(d.id, d.data()));
+function applyExploreClientFilters(cases: Case[], filters: ExploreFilters): Case[] {
+  let filtered = cases;
 
   if (filters.species) {
-    cases = cases.filter((c) => c.petSnapshot.species === filters.species);
+    filtered = filtered.filter((c) => c.petSnapshot.species === filters.species);
   }
   if (filters.neighborhood) {
-    cases = cases.filter((c) => c.neighborhood === filters.neighborhood);
+    filtered = filtered.filter((c) => c.neighborhood === filters.neighborhood);
   }
   if (filters.search) {
     const term = filters.search.toLowerCase();
-    cases = cases.filter(
+    filtered = filtered.filter(
       (c) =>
         c.title.toLowerCase().includes(term) ||
         c.description.toLowerCase().includes(term) ||
@@ -257,7 +257,59 @@ export async function exploreCases(
     );
   }
 
-  return cases;
+  return filtered;
+}
+
+async function fetchExploreCasesFromFirestore(
+  filters: ExploreFilters,
+  maxResults: number
+): Promise<Case[]> {
+  if (!db) return [];
+
+  const baseConstraints = buildExploreQueryConstraints(filters);
+
+  try {
+    const q = query(
+      collection(db, FIRESTORE_COLLECTIONS.cases),
+      ...baseConstraints,
+      orderBy('createdAt', 'desc'),
+      limit(maxResults)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => firestoreToCase(d.id, d.data()));
+  } catch (error) {
+    if (!isFirestoreIndexError(error) || baseConstraints.length === 0) {
+      throw error;
+    }
+
+    const fallbackQ = query(
+      collection(db, FIRESTORE_COLLECTIONS.cases),
+      ...baseConstraints,
+      limit(Math.min(maxResults * 5, 200))
+    );
+    const snap = await getDocs(fallbackQ);
+    return snap.docs
+      .map((d) => firestoreToCase(d.id, d.data()))
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, maxResults);
+  }
+}
+
+export function caseMatchesExploreFilters(caseItem: Case, filters: ExploreFilters): boolean {
+  if (filters.caseType && caseItem.caseType !== filters.caseType) return false;
+  if (filters.city && caseItem.city !== filters.city) return false;
+  if (filters.province && caseItem.province !== filters.province) return false;
+  return applyExploreClientFilters([caseItem], filters).length > 0;
+}
+
+export async function exploreCases(
+  filters: ExploreFilters,
+  maxResults = 50
+): Promise<Case[]> {
+  if (!isFirebaseConfigured() || !db) return [];
+
+  const cases = await fetchExploreCasesFromFirestore(filters, maxResults);
+  return applyExploreClientFilters(cases, filters);
 }
 
 export async function getRecentCasesNearby(
