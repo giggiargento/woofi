@@ -290,6 +290,107 @@
       "seeDocs": "See docs/FIREBASE-SETUP.md to get values from Firebase Console."
     }
   },
+  "marketing": {
+    "nav": {
+      "services": "Services",
+      "about": "About us",
+      "plan": "Plan",
+      "login": "Sign in",
+      "register": "Create account"
+    },
+    "hero": {
+      "badge": "Digital notebook + community",
+      "title": "Your pet, organized. Your neighborhood, connected.",
+      "subtitle": "WOOFI is where you keep your pet's profile, explore adoption and transit cases, and help when someone needs it — no drama, just care.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "See how it works",
+      "proof": "Built for dog and cat owners in Argentina."
+    },
+    "services": {
+      "title": "Everything WOOFI does for you and others",
+      "subtitle": "We're not an emergency app: we're your notebook and the neighbors who show up.",
+      "comingSoon": "Coming soon",
+      "items": {
+        "cuaderno": {
+          "title": "Digital notebook",
+          "description": "Private profiles for your pets: details, health, photos. Only you and who you choose."
+        },
+        "explorar": {
+          "title": "Explore cases",
+          "description": "Lost, found, adoption, and transit in one place."
+        },
+        "publicar": {
+          "title": "Publish a case",
+          "description": "Create a public post when your pet goes missing or you find one."
+        },
+        "adopcion": {
+          "title": "Adoption & transit",
+          "description": "Connect with people looking for a home or temporary foster care."
+        },
+        "favoritos": {
+          "title": "Favorites & alerts",
+          "description": "Save cases that matter and get updates when there's news."
+        },
+        "identificacion": {
+          "title": "Identification",
+          "description": "QR and documents — coming soon."
+        }
+      }
+    },
+    "about": {
+      "title": "About us",
+      "lead": "WOOFI exists for everyday pet care in Argentina: registry, identification, and community — not a clinical service or a generic social network.",
+      "bullets": {
+        "1": "Private notebook for owners",
+        "2": "Public cases when help is needed",
+        "3": "Clear, human tone — no alarmism",
+        "4": "Built for dogs and cats (MVP)"
+      },
+      "cta": "See the plan"
+    },
+    "plan": {
+      "title": "WOOFI plan",
+      "subtitle": "Start at no cost and add pets whenever you want.",
+      "name": "WOOFI plan",
+      "priceLabel": "Free to start",
+      "price": "$0",
+      "period": "/ forever",
+      "features": {
+        "1": "Pet profiles",
+        "2": "Publish cases",
+        "3": "Explore and filter",
+        "4": "Favorites"
+      },
+      "cta": "Create account",
+      "note": "Premium features and organizations — later."
+    },
+    "cta": {
+      "title": "Start with your first pet today",
+      "subtitle": "Create your account in minutes. No card required.",
+      "button": "Create free account"
+    },
+    "footer": {
+      "tagline": "The digital notebook and neighbor network for your pet.",
+      "copyright": "© 2026 WOOFI",
+      "columns": {
+        "product": {
+          "title": "Product",
+          "services": "Services",
+          "plan": "Plan",
+          "explore": "Explore"
+        },
+        "legal": {
+          "title": "Legal",
+          "privacy": "Privacy",
+          "terms": "Terms"
+        },
+        "contact": {
+          "title": "Contact",
+          "locale": "Spanish (Argentina)"
+        }
+      }
+    }
+  },
   "designPreview": {
     "title": "Design system",
     "subtitle": "Dev-only preview of UI tokens and components (BRAND-GUIDELINES §3.2).",

@@ -290,6 +290,107 @@
       "seeDocs": "Ver docs/FIREBASE-SETUP.md para obtener los valores desde Firebase Console."
     }
   },
+  "marketing": {
+    "nav": {
+      "services": "Servicios",
+      "about": "Quiénes somos",
+      "plan": "Plan",
+      "login": "Iniciar sesión",
+      "register": "Crear cuenta"
+    },
+    "hero": {
+      "badge": "Cuaderno digital + comunidad",
+      "title": "Tu mascota, organizada. Tu barrio, conectado.",
+      "subtitle": "WOOFI es el lugar donde guardás el perfil de tu mascota, explorás casos de adopción y tránsito, y ayudás cuando alguien la necesita — sin drama, con cariño.",
+      "ctaPrimary": "Empezá gratis",
+      "ctaSecondary": "Ver cómo funciona",
+      "proof": "Hecho para dueños de perros y gatos en Argentina."
+    },
+    "services": {
+      "title": "Todo lo que WOOFI hace por vos y por otros",
+      "subtitle": "No somos una app de emergencia: somos tu cuaderno y la red de vecinos que suma.",
+      "comingSoon": "Próximamente",
+      "items": {
+        "cuaderno": {
+          "title": "Cuaderno digital",
+          "description": "Perfiles privados de tus mascotas: datos, salud, fotos. Solo vos y quien elijas."
+        },
+        "explorar": {
+          "title": "Explorar casos",
+          "description": "Perdidos, encontrados, adopción y tránsito en un solo lugar."
+        },
+        "publicar": {
+          "title": "Publicar un caso",
+          "description": "Creá una publicación pública cuando tu mascota se pierde o encontrás una."
+        },
+        "adopcion": {
+          "title": "Adopción y tránsito",
+          "description": "Conectá con quienes buscan hogar o necesitan tránsito temporal."
+        },
+        "favoritos": {
+          "title": "Favoritos y alertas",
+          "description": "Guardá casos que te importan y enterate cuando haya novedades."
+        },
+        "identificacion": {
+          "title": "Identificación",
+          "description": "QR y documentos — próximamente."
+        }
+      }
+    },
+    "about": {
+      "title": "Quiénes somos",
+      "lead": "WOOFI nace para el cuidado cotidiano de mascotas en Argentina: registro, identificación y comunidad — no un servicio clínico ni una red social genérica.",
+      "bullets": {
+        "1": "Cuaderno privado para dueños",
+        "2": "Casos públicos cuando hace falta ayudar",
+        "3": "Tono claro y humano, sin alarmismo",
+        "4": "Hecho para perros y gatos (MVP)"
+      },
+      "cta": "Conocé el plan"
+    },
+    "plan": {
+      "title": "Plan WOOFI",
+      "subtitle": "Empezá sin costo y sumá mascotas cuando quieras.",
+      "name": "Plan WOOFI",
+      "priceLabel": "Gratis para empezar",
+      "price": "$0",
+      "period": "/ siempre",
+      "features": {
+        "1": "Perfiles de mascotas",
+        "2": "Publicar casos",
+        "3": "Explorar y filtrar",
+        "4": "Favoritos"
+      },
+      "cta": "Crear cuenta",
+      "note": "Funciones premium y organizaciones — más adelante."
+    },
+    "cta": {
+      "title": "Empezá con tu primera mascota hoy",
+      "subtitle": "Creá tu cuenta en minutos. Sin tarjeta.",
+      "button": "Crear cuenta gratis"
+    },
+    "footer": {
+      "tagline": "El cuaderno digital y la red de vecinos para tu mascota.",
+      "copyright": "© 2026 WOOFI",
+      "columns": {
+        "product": {
+          "title": "Producto",
+          "services": "Servicios",
+          "plan": "Plan",
+          "explore": "Explorar"
+        },
+        "legal": {
+          "title": "Legal",
+          "privacy": "Privacidad",
+          "terms": "Términos"
+        },
+        "contact": {
+          "title": "Contacto",
+          "locale": "Español (Argentina)"
+        }
+      }
+    }
+  },
   "designPreview": {
     "title": "Design system",
     "subtitle": "Vista dev-only de tokens y componentes UI (BRAND-GUIDELINES §3.2).",

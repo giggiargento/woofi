@@ -28,7 +28,8 @@ export type PastelColor =
   | 'mint'
   | 'primary'
   | 'butter'
-  | 'cream';
+  | 'cream'
+  | 'sand';
 
 /** Hex values for inline styles (e.g. CaseCard placeholders) */
 export const pastelBg: Record<PastelColor, string> = {
@@ -39,6 +40,7 @@ export const pastelBg: Record<PastelColor, string> = {
   primary: semantic.primary,
   butter: pastel.butter,
   cream: brand.cream,
+  sand: pastel.sand,
 };
 
 /** NativeWind class names — single map for all pastel-backed components */
@@ -50,4 +52,5 @@ export const pastelClassNames: Record<PastelColor, string> = {
   primary: 'bg-primary',
   butter: 'bg-butter',
   cream: 'bg-cream',
+  sand: 'bg-sand',
 };
