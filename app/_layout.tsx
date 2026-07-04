@@ -1,7 +1,8 @@
 import '../global.css';
 import '@/i18n';
 import { useEffect } from 'react';
-import { Stack, useRouter, useSegments } from 'expo-router';
+import { Platform } from 'react-native';
+import { Stack, useRouter, useSegments, usePathname } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -24,6 +25,7 @@ const queryClient = new QueryClient({
 function AuthGate({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isInitialized } = useAuth();
   const segments = useSegments();
+  const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
@@ -31,15 +33,17 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
     const inAuthGroup = segments[0] === '(auth)';
     const isDesignPreview = __DEV__ && segments[0] === 'design-preview';
+    const isWebMarketingHome =
+      Platform.OS === 'web' && !isAuthenticated && pathname === '/';
 
-    if (isDesignPreview) return;
+    if (isDesignPreview || isWebMarketingHome) return;
 
     if (!isAuthenticated && !inAuthGroup) {
       router.replace('/(auth)/login');
     } else if (isAuthenticated && inAuthGroup) {
       router.replace('/(tabs)');
     }
-  }, [isAuthenticated, isInitialized, segments, router]);
+  }, [isAuthenticated, isInitialized, segments, pathname, router]);
 
   return <>{children}</>;
 }
@@ -50,6 +54,7 @@ function RootLayoutNav() {
   return (
     <AuthGate>
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: COLORS.background } }}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="pet" options={{ headerShown: false }} />
