@@ -286,5 +286,44 @@
       "missingEnv": "Missing variables in the project .env file:",
       "seeDocs": "See docs/FIREBASE-SETUP.md to get values from Firebase Console."
     }
+  },
+  "designPreview": {
+    "title": "Design system",
+    "subtitle": "Dev-only preview of UI tokens and components (BRAND-GUIDELINES §3.2).",
+    "sections": {
+      "colors": "Colors",
+      "buttons": "Buttons",
+      "cards": "Cards",
+      "chips": "Chips",
+      "badges": "Badges",
+      "inputs": "Inputs",
+      "emptyState": "Empty state"
+    },
+    "samples": {
+      "primaryButton": "Primary",
+      "secondaryButton": "Secondary",
+      "outlineButton": "Outline",
+      "ghostButton": "Ghost",
+      "destructiveButton": "Destructive",
+      "defaultCard": "Default card",
+      "pastelCard": "Lavender pastel card",
+      "flatCard": "Flat card",
+      "inputLabel": "Label",
+      "inputPlaceholder": "Type something…",
+      "inputErrorLabel": "With error",
+      "inputError": "This field is required",
+      "emptyTitle": "Nothing here",
+      "emptySubtitle": "Sample empty state with mint accent.",
+      "emptyCta": "Action",
+      "chip": {
+        "lavender": "Lavender",
+        "sky": "Sky",
+        "mint": "Mint",
+        "pink": "Pink",
+        "primary": "Orange",
+        "butter": "Butter",
+        "cream": "Cream"
+      }
+    }
   }
 }

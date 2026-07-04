@@ -286,5 +286,44 @@
       "missingEnv": "Faltan variables en el archivo .env del proyecto:",
       "seeDocs": "Ver docs/FIREBASE-SETUP.md para obtener los valores desde Firebase Console."
     }
+  },
+  "designPreview": {
+    "title": "Design system",
+    "subtitle": "Vista dev-only de tokens y componentes UI (BRAND-GUIDELINES §3.2).",
+    "sections": {
+      "colors": "Colores",
+      "buttons": "Botones",
+      "cards": "Cards",
+      "chips": "Chips",
+      "badges": "Badges",
+      "inputs": "Inputs",
+      "emptyState": "Empty state"
+    },
+    "samples": {
+      "primaryButton": "Primario",
+      "secondaryButton": "Secundario",
+      "outlineButton": "Outline",
+      "ghostButton": "Ghost",
+      "destructiveButton": "Destructivo",
+      "defaultCard": "Card default",
+      "pastelCard": "Card pastel lavanda",
+      "flatCard": "Card flat",
+      "inputLabel": "Etiqueta",
+      "inputPlaceholder": "Escribí algo…",
+      "inputErrorLabel": "Con error",
+      "inputError": "Este campo es obligatorio",
+      "emptyTitle": "Nada por acá",
+      "emptySubtitle": "Ejemplo de empty state con acento menta.",
+      "emptyCta": "Acción",
+      "chip": {
+        "lavender": "Lavanda",
+        "sky": "Cielo",
+        "mint": "Menta",
+        "pink": "Rosa",
+        "primary": "Naranja",
+        "butter": "Mantequilla",
+        "cream": "Crema"
+      }
+    }
   }
 }

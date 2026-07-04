@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { cn } from '@/utils/cn';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 
 interface ChipProps {
   label: string;
@@ -10,16 +11,6 @@ interface ChipProps {
   icon?: React.ReactNode;
   className?: string;
 }
-
-const colorMap: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function Chip({
   label,
@@ -36,7 +27,7 @@ export function Chip({
       activeOpacity={0.8}
       className={cn(
         'mr-2 flex-row items-center rounded-full border-2 border-border px-4 py-2.5',
-        selected ? colorMap[color] : 'bg-card',
+        selected ? pastelClassNames[color] : 'bg-card',
         className
       )}
     >

@@ -4,26 +4,13 @@ export const BRAND_PATHS = {
   favicon: 'assets/brand/favicon.svg',
 } as const;
 
-export const BRAND_COLORS = {
-  orange: '#ffb850',
-  cream: '#fff2d0',
-  brown: '#5e4432',
-} as const;
+import { brand, COLORS as DESIGN_COLORS } from '@/design/tokens';
 
-export const COLORS = {
-  primary: '#F9A23B',
-  background: '#FFF4EA',
-  cream: '#FFF9F3',
-  butter: '#FFF4B8',
-  lavender: '#D8C3FF',
-  pink: '#FFC8D8',
-  sky: '#BDEFFF',
-  mint: '#CFF5DC',
-  text: '#1F2937',
-  muted: '#6B7280',
-  card: '#FFFFFF',
-  border: '#000000',
-} as const;
+/** Logo-locked palette — see docs/brand/BRAND-GUIDELINES.md §3.1 */
+export const BRAND_COLORS = brand;
+
+/** Semantic UI colors — sourced from src/design/tokens.js */
+export const COLORS = DESIGN_COLORS;
 
 export const CASE_TYPE_COLORS = {
   lost: COLORS.primary,

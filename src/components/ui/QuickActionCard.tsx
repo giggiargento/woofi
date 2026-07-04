@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/utils/cn';
 import { shadows } from './shadows';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 
 interface QuickActionCardProps {
   label: string;
@@ -13,16 +14,6 @@ interface QuickActionCardProps {
   description?: string;
   className?: string;
 }
-
-const colorClass: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function QuickActionCard({
   label,
@@ -66,7 +57,7 @@ export function QuickActionCard({
       <View
         className={cn(
           'w-[108px] items-center rounded-3xl border-2 border-border p-4',
-          colorClass[color]
+          pastelClassNames[color]
         )}
         style={shadows.card}
       >

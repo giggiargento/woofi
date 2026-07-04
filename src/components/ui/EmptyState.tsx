@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Button } from './Button';
 import { shadows } from './shadows';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 
 interface EmptyStateProps {
   title: string;
@@ -12,16 +13,6 @@ interface EmptyStateProps {
   icon?: keyof typeof Ionicons.glyphMap;
   accent?: PastelColor;
 }
-
-const accentBg: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function EmptyState({
   title,
@@ -34,7 +25,7 @@ export function EmptyState({
   return (
     <View className="flex-1 items-center justify-center px-8 py-16">
       <View
-        className={`mb-6 rounded-full border-2 border-border p-7 ${accentBg[accent]}`}
+        className={`mb-6 rounded-full border-2 border-border p-7 ${pastelClassNames[accent]}`}
         style={shadows.card}
       >
         <Ionicons name={icon} size={52} color="#1F2937" />

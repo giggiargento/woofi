@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/utils/cn';
 import { shadows } from './shadows';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 
 interface InfoChipProps {
   label: string;
@@ -11,16 +12,6 @@ interface InfoChipProps {
   color?: PastelColor;
   className?: string;
 }
-
-const colorClass: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function InfoChip({
   label,
@@ -33,7 +24,7 @@ export function InfoChip({
     <View
       className={cn(
         'w-[47%] rounded-2xl border-2 border-border p-3.5',
-        colorClass[color],
+        pastelClassNames[color],
         className
       )}
       style={shadows.soft}

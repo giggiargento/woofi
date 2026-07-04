@@ -29,6 +29,9 @@ function AuthGate({ children }: { children: React.ReactNode }) {
     if (!isInitialized) return;
 
     const inAuthGroup = segments[0] === '(auth)';
+    const isDesignPreview = __DEV__ && segments[0] === 'design-preview';
+
+    if (isDesignPreview) return;
 
     if (!isAuthenticated && !inAuthGroup) {
       router.replace('/(auth)/login');
@@ -48,14 +51,14 @@ function RootLayoutNav() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#FFF4EA' } }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="pet/[id]" options={{ headerShown: true, title: '' }} />
-        <Stack.Screen name="pet/[id]/edit" options={{ headerShown: true, title: '' }} />
-        <Stack.Screen name="case/[id]" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="pet" options={{ headerShown: false }} />
+        <Stack.Screen name="case" options={{ headerShown: false }} />
         <Stack.Screen name="create" options={{ headerShown: false }} />
         <Stack.Screen name="explore/map" options={{ headerShown: true, title: '' }} />
         <Stack.Screen name="explore/filters" options={{ presentation: 'modal', title: '' }} />
         <Stack.Screen name="favorites" options={{ headerShown: true, title: '' }} />
         <Stack.Screen name="settings/index" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="design-preview" options={{ headerShown: true, title: '' }} />
       </Stack>
     </AuthGate>
   );

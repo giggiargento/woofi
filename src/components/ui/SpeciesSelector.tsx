@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { PET_SPECIES, PET_SPECIES_PASTEL, type PetSpecies } from '@/types/species';
 import { PET_SPECIES_ICONS } from '@/utils/speciesIcons';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 import { cn } from '@/utils/cn';
 
 interface SpeciesSelectorProps {
@@ -11,16 +12,6 @@ interface SpeciesSelectorProps {
   onChange: (species: PetSpecies) => void;
   className?: string;
 }
-
-const pastelClass: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function SpeciesSelector({ value, onChange, className }: SpeciesSelectorProps) {
   const { t } = useTranslation();
@@ -39,7 +30,7 @@ export function SpeciesSelector({ value, onChange, className }: SpeciesSelectorP
               activeOpacity={0.85}
               className={cn(
                 'min-w-[120px] flex-1 flex-row items-center justify-center rounded-3xl border-2 border-border px-4 py-3',
-                selected ? pastelClass[color] : 'bg-card'
+                selected ? pastelClassNames[color] : 'bg-card'
               )}
             >
               <MaterialCommunityIcons

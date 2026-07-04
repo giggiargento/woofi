@@ -2,6 +2,7 @@ import { View, type ViewProps } from 'react-native';
 import { cn } from '@/utils/cn';
 import { shadows, type ShadowVariant } from './shadows';
 import type { PastelColor } from './theme';
+import { pastelClassNames } from './theme';
 
 export type CardVariant = 'default' | 'floating' | 'pastel' | 'flat';
 
@@ -12,16 +13,6 @@ interface CardProps extends ViewProps {
   pastel?: PastelColor;
   shadow?: ShadowVariant | 'none';
 }
-
-const pastelClass: Record<PastelColor, string> = {
-  lavender: 'bg-lavender',
-  pink: 'bg-pink',
-  sky: 'bg-sky',
-  mint: 'bg-mint',
-  primary: 'bg-primary',
-  butter: 'bg-butter',
-  cream: 'bg-cream',
-};
 
 export function Card({
   className,
@@ -40,7 +31,7 @@ export function Card({
       className={cn(
         'rounded-3xl border-2 border-border p-4',
         variant === 'flat' ? 'bg-transparent' : 'bg-card',
-        pastel && pastelClass[pastel],
+        pastel && pastelClassNames[pastel],
         className
       )}
       style={[shadowVariant !== 'none' ? shadows[shadowVariant] : undefined, style]}
