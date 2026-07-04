@@ -24,6 +24,9 @@
     "required": "Required field",
     "unknownStatus": "Unknown status"
   },
+  "brand": {
+    "logoAccessibility": "WOOFI"
+  },
   "auth": {
     "login": "Sign in",
     "register": "Create account",

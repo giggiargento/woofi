@@ -39,7 +39,6 @@ export default function ExploreMapScreen() {
       <Stack.Screen
         options={{
           title: t('map.title'),
-          headerStyle: { backgroundColor: '#FFF4EA' },
           headerShadowVisible: false,
         }}
       />

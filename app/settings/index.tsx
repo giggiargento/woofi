@@ -14,7 +14,6 @@ export default function SettingsScreen() {
       <Stack.Screen
         options={{
           title: t('settings.title'),
-          headerStyle: { backgroundColor: '#FFF4EA' },
           headerShadowVisible: false,
         }}
       />

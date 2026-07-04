@@ -82,7 +82,8 @@ Expo/EAS requieren **PNG** para launcher y splash; los SVG oficiales son la fuen
 
 Fondo splash / adaptive: crema `#FFF6E5` o `#fff2d0` — no legacy `#FFF4EA`.
 
-**Spec completa (export, safe zone Android, herramientas):** [`docs/brand/APP-ICON-SPLASH.md`](APP-ICON-SPLASH.md)
+**Spec completa (export, safe zone Android, herramientas):** [`docs/brand/APP-ICON-SPLASH.md`](APP-ICON-SPLASH.md)  
+**Checklist Figma/Inkscape (Giggi):** [`PNG-EXPORT-CHECKLIST.md`](PNG-EXPORT-CHECKLIST.md)
 
 ---
 
@@ -191,6 +192,7 @@ Variantes **no aprobadas** sin revisión Brand: gradientes, outline blanco grues
 **Archivos de referencia cruzada**
 
 - App icon & splash: `docs/brand/APP-ICON-SPLASH.md`
+- Export PNG (Figma/Inkscape): `docs/brand/PNG-EXPORT-CHECKLIST.md`
 - Assets: `assets/brand/README.md`
 - Tokens UX target: `docs/agents/UX-AGENT.md`
 - Auditoría técnica: `docs/design/DESIGN-SYSTEM-AUDIT.md`

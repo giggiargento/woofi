@@ -10,7 +10,7 @@ import {
 import { Link, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Input, Button } from '@/components';
+import { Input, Button, BrandLogo } from '@/components';
 import { registerSchema } from '@/schemas';
 import { useAuth } from '@/hooks/useAuth';
 import { isFirebaseConfigured } from '@/services/firebase/app';
@@ -71,8 +71,15 @@ export default function RegisterScreen() {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <Text className="mb-2 text-3xl font-bold text-text">{t('auth.register')}</Text>
-          <Text className="mb-8 text-base text-muted">{t('auth.welcomeSubtitle')}</Text>
+          <View className="mb-8 items-center">
+            <BrandLogo size="auth" className="mb-6" />
+            <Text className="mb-2 text-center text-3xl font-bold text-text">
+              {t('auth.register')}
+            </Text>
+            <Text className="max-w-xs text-center text-base text-muted">
+              {t('auth.welcomeSubtitle')}
+            </Text>
+          </View>
 
           <Input
             label={t('auth.displayName')}

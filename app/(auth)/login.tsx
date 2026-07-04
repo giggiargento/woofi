@@ -10,12 +10,11 @@ import {
 import { Link, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Input, Button } from '@/components';
+import { Input, Button, BrandLogo } from '@/components';
 import { FirebaseSetupBanner } from '@/components/FirebaseSetupBanner';
 import { loginSchema } from '@/schemas';
 import { useAuth } from '@/hooks/useAuth';
 import { isFirebaseConfigured } from '@/services/firebase/app';
-import { shadows } from '@/components';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
@@ -63,12 +62,7 @@ export default function LoginScreen() {
         >
           <FirebaseSetupBanner />
           <View className="mb-10 items-center">
-            <View
-              className="mb-5 rounded-full border-2 border-border bg-primary p-6"
-              style={shadows.float}
-            >
-              <Text className="text-5xl">🐾</Text>
-            </View>
+            <BrandLogo size="auth" className="mb-6" />
             <Text className="text-center text-3xl font-bold text-text">
               {t('auth.welcomeTitle')}
             </Text>

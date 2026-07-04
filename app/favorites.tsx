@@ -1,7 +1,8 @@
 import { FlatList } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { CaseCard, EmptyState, LoadingSpinner } from '@/components';
+import { CaseCard, EmptyState, LoadingSpinner, WebShell } from '@/components';
+import { COLORS } from '@/constants';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useCase } from '@/hooks/useCases';
 
@@ -27,30 +28,32 @@ export default function FavoritesScreen() {
       <Stack.Screen
         options={{
           title: t('favorites.title'),
-          headerStyle: { backgroundColor: '#FFF4EA' },
+          headerStyle: { backgroundColor: COLORS.background },
           headerShadowVisible: false,
         }}
       />
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <FlatList
-          className="flex-1 bg-background"
-          contentContainerClassName="px-4 py-4 pb-10"
-          data={caseFavorites}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={
-            <EmptyState
-              title={t('favorites.empty')}
-              subtitle={t('favorites.emptySubtitle')}
-              icon="heart-outline"
-              accent="pink"
-            />
-          }
-          renderItem={({ item }) => <FavoriteCaseItem caseId={item.targetId} />}
-        />
-      )}
+      <WebShell>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <FlatList
+            className="flex-1 bg-background"
+            contentContainerClassName="px-4 py-4 pb-10"
+            data={caseFavorites}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              <EmptyState
+                title={t('favorites.empty')}
+                subtitle={t('favorites.emptySubtitle')}
+                icon="heart-outline"
+                accent="pink"
+              />
+            }
+            renderItem={({ item }) => <FavoriteCaseItem caseId={item.targetId} />}
+          />
+        )}
+      </WebShell>
     </>
   );
 }

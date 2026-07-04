@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 import { useAuthInit, useAuth } from '@/hooks/useAuth';
+import { COLORS } from '@/constants';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -48,16 +49,15 @@ function RootLayoutNav() {
 
   return (
     <AuthGate>
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#FFF4EA' } }}>
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: COLORS.background } }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="pet" options={{ headerShown: false }} />
         <Stack.Screen name="case" options={{ headerShown: false }} />
         <Stack.Screen name="create" options={{ headerShown: false }} />
-        <Stack.Screen name="explore/map" options={{ headerShown: true, title: '' }} />
-        <Stack.Screen name="explore/filters" options={{ presentation: 'modal', title: '' }} />
+        <Stack.Screen name="explore" options={{ headerShown: false }} />
         <Stack.Screen name="favorites" options={{ headerShown: true, title: '' }} />
-        <Stack.Screen name="settings/index" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="settings" options={{ headerShown: false }} />
         <Stack.Screen name="design-preview" options={{ headerShown: true, title: '' }} />
       </Stack>
     </AuthGate>

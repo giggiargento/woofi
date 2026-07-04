@@ -2,7 +2,16 @@
 
 Three specialized agents (+ one coordination chat). **Do not overwrite each other's domain.**
 
+**Tarea activa (modo simple):** `docs/agents/ACTIVE-TASK.md` — un agente, un scope, commitea 📁.
+
 Setup: `docs/agents/CHATS-SETUP.md`
+
+## Modo simple (recomendado)
+
+1. Solo **un chat implementa** a la vez (Dev **o** UX, nunca ambos en paralelo).
+2. La tarea vive en `ACTIVE-TASK.md` — archivos permitidos y prohibidos explícitos.
+3. El agente **no commitea**; el chat 📁 revisa, probás vos, y commitea.
+4. **Brand** y **UX** en pausa hasta nueva tarea en `ACTIVE-TASK.md`.
 
 ## Roles
 
