@@ -11,7 +11,7 @@ interface BadgeProps {
 }
 
 const typeColors: Record<CaseType, string> = {
-  lost: 'bg-primary',
+  lost: 'bg-butter',
   found: 'bg-sky',
   adoption: 'bg-mint',
   transit: 'bg-lavender',
@@ -25,7 +25,7 @@ export function Badge({ status, caseType = 'lost', size = 'sm', className }: Bad
   return (
     <View
       className={cn(
-        'flex-row items-center self-start rounded-full border-2 border-border',
+        'flex-row items-center self-start rounded-full',
         typeColors[caseType],
         size === 'sm' ? 'px-3 py-1' : 'px-4 py-1.5',
         className
@@ -33,10 +33,7 @@ export function Badge({ status, caseType = 'lost', size = 'sm', className }: Bad
     >
       <View className="mr-1.5 h-1.5 w-1.5 rounded-full bg-text" />
       <Text
-        className={cn(
-          'font-semibold text-text',
-          size === 'sm' ? 'text-xs' : 'text-sm'
-        )}
+        className={cn('font-semibold text-text', size === 'sm' ? 'text-xs' : 'text-sm')}
       >
         {label}
       </Text>

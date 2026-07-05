@@ -1,4 +1,4 @@
-const { tailwindColors } = require('./src/design/tokens.js');
+const { tailwindColors, tailwindFontSize, shadows } = require('./src/design/tokens.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,8 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: tailwindColors,
+      fontSize: tailwindFontSize,
       borderRadius: {
-        '2xl': '20px',
+        xl: '12px',
+        '2xl': '16px',
         '3xl': '24px',
         '4xl': '28px',
       },
@@ -18,8 +20,9 @@ module.exports = {
         bold: ['Inter_700Bold'],
       },
       boxShadow: {
-        soft: '0 4px 12px rgba(0, 0, 0, 0.08)',
-        card: '0 6px 16px rgba(0, 0, 0, 0.1)',
+        'warm-sm': shadows.warmSm,
+        'warm-md': shadows.warmMd,
+        'warm-lg': shadows.warmLg,
       },
     },
   },

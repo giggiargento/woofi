@@ -1,12 +1,21 @@
 import { Platform, View, useWindowDimensions } from 'react-native';
 import { cn } from '@/utils/cn';
+import { breakpoints } from '@/design/tokens';
 
 /** Tailwind `lg` breakpoint — desktop web shell activates at this width. */
-export const WEB_SHELL_BREAKPOINT = 1024;
+export const WEB_SHELL_BREAKPOINT = breakpoints.desktop;
+
+/** Tablet breakpoint — collapsed sidebar. */
+export const TABLET_BREAKPOINT = breakpoints.tablet;
 
 export function useIsWideWeb() {
   const { width } = useWindowDimensions();
   return Platform.OS === 'web' && width >= WEB_SHELL_BREAKPOINT;
+}
+
+export function useIsTabletWeb() {
+  const { width } = useWindowDimensions();
+  return Platform.OS === 'web' && width >= TABLET_BREAKPOINT;
 }
 
 interface WebShellProps {
@@ -24,11 +33,7 @@ export function WebShell({ children, className }: WebShellProps) {
   return (
     <View className="flex-1 bg-background">
       <View
-        className={cn(
-          'flex-1 w-full',
-          isWideWeb && 'mx-auto max-w-6xl px-6',
-          className
-        )}
+        className={cn('w-full flex-1', isWideWeb && 'mx-auto max-w-6xl px-6', className)}
       >
         {children}
       </View>

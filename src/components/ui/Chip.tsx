@@ -26,8 +26,9 @@ export function Chip({
       disabled={!onPress}
       activeOpacity={0.8}
       className={cn(
-        'mr-2 flex-row items-center rounded-full border-2 border-border px-4 py-2.5',
-        selected ? pastelClassNames[color] : 'bg-card',
+        'mr-2 flex-row items-center rounded-full px-4 py-2.5',
+        selected ? cn(pastelClassNames[color], 'ring-2 ring-primary/30') : 'bg-surface',
+        !selected && 'border border-border',
         className
       )}
     >

@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/utils/cn';
+import { COLORS } from '@/constants';
 import { shadows } from './shadows';
 import type { PastelColor } from './theme';
 import { pastelClassNames } from './theme';
@@ -32,11 +33,11 @@ export function QuickActionCard({
         className={cn('mb-4', className)}
       >
         <View
-          className="flex-row items-center rounded-3xl border-2 border-border bg-primary p-5"
-          style={shadows.float}
+          className="flex-row items-center rounded-3xl bg-primary p-5 shadow-warm-lg"
+          style={shadows.warmLg}
         >
-          <View className="mr-4 rounded-2xl border-2 border-border bg-card/90 p-3">
-            <Ionicons name={icon} size={32} color="#1F2937" />
+          <View className="mr-4 rounded-2xl bg-surface/90 p-3">
+            <Ionicons name={icon} size={32} color={COLORS.text} />
           </View>
           <View className="flex-1">
             <Text className="text-lg font-bold text-text">{label}</Text>
@@ -44,8 +45,8 @@ export function QuickActionCard({
               <Text className="mt-1 text-sm text-text/80">{description}</Text>
             ) : null}
           </View>
-          <View className="rounded-full border-2 border-border bg-card px-3 py-1.5">
-            <Ionicons name="arrow-forward" size={18} color="#1F2937" />
+          <View className="rounded-full bg-surface px-3 py-1.5">
+            <Ionicons name="arrow-forward" size={18} color={COLORS.text} />
           </View>
         </View>
       </TouchableOpacity>
@@ -56,13 +57,13 @@ export function QuickActionCard({
     <TouchableOpacity onPress={onPress} activeOpacity={0.9} className={cn('mr-3', className)}>
       <View
         className={cn(
-          'w-[108px] items-center rounded-3xl border-2 border-border p-4',
+          'w-[108px] items-center rounded-3xl p-4 shadow-warm-md',
           pastelClassNames[color]
         )}
-        style={shadows.card}
+        style={shadows.warmMd}
       >
-        <View className="mb-3 rounded-2xl border-2 border-border bg-card p-2.5">
-          <Ionicons name={icon} size={26} color="#1F2937" />
+        <View className="mb-3 rounded-2xl bg-surface p-2.5">
+          <Ionicons name={icon} size={26} color={COLORS.text} />
         </View>
         <Text className="text-center text-xs font-bold leading-4 text-text" numberOfLines={2}>
           {label}

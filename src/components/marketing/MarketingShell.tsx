@@ -56,7 +56,7 @@ export function MarketingShell({ children }: MarketingShellProps) {
 
   return (
     <SafeAreaView className="flex-1 bg-background" edges={['top']}>
-      <View className="border-b-2 border-border bg-background">
+      <View className="border-b border-border bg-background">
         <View
           className={cn(
             'mx-auto w-full max-w-6xl flex-row items-center justify-between px-6 py-4',

@@ -1,9 +1,10 @@
-export { Card } from './ui/Card';
+export { Card, FeatureCard } from './ui/Card';
 export { Button, PrimaryButton } from './ui/Button';
 export { Input } from './ui/Input';
 export { PetAgeInput } from './ui/PetAgeInput';
 export { Chip, ChipRow } from './ui/Chip';
 export { Badge, StatusBadge } from './ui/Badge';
+export { PricingCard } from './ui/PricingCard';
 export { PetCard } from './ui/PetCard';
 export { CaseCard } from './ui/CaseCard';
 export { EmptyState } from './ui/EmptyState';
@@ -22,7 +23,19 @@ export { ConfirmDialog, InlineError } from './ui/ConfirmDialog';
 export { BrandLogo, Logo } from './ui/BrandLogo';
 export { theme } from './ui/theme';
 export { shadows } from './ui/shadows';
-export { WebShell, useIsWideWeb, WEB_SHELL_BREAKPOINT } from './layout/WebShell';
+export {
+  WebShell,
+  useIsWideWeb,
+  useIsTabletWeb,
+  WEB_SHELL_BREAKPOINT,
+  TABLET_BREAKPOINT,
+} from './layout/WebShell';
+export { PageSection } from './layout/PageSection';
+export { PageHeader } from './layout/PageHeader';
+export { AppSidebar } from './layout/AppSidebar';
+export { AppDesktopLayout } from './layout/AppDesktopLayout';
+export { AuthCard } from './layout/AuthCard';
+export { SidebarNavItem } from './layout/SidebarNavItem';
 export {
   MarketingHome,
   MarketingShell,

@@ -2,14 +2,15 @@ import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { COLORS } from '@/constants';
 import { shadows } from './shadows';
 
 const TAB_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
-  index: 'home',
-  explore: 'compass',
+  index: 'home-outline',
+  explore: 'compass-outline',
   add: 'add',
-  alerts: 'notifications',
-  profile: 'person',
+  alerts: 'notifications-outline',
+  profile: 'person-outline',
 };
 
 export function BottomNavigation({ state, descriptors, navigation }: BottomTabBarProps) {
@@ -23,8 +24,8 @@ export function BottomNavigation({ state, descriptors, navigation }: BottomTabBa
       pointerEvents="box-none"
     >
       <View
-        className="flex-row items-center justify-around rounded-[28px] border-2 border-border bg-card px-2 py-2"
-        style={shadows.float}
+        className="flex-row items-center justify-around rounded-full bg-surface px-2 py-2 shadow-warm-lg"
+        style={shadows.warmLg}
       >
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -34,7 +35,7 @@ export function BottomNavigation({ state, descriptors, navigation }: BottomTabBa
               : options.title ?? route.name;
           const isFocused = state.index === index;
           const isAdd = route.name === 'add';
-          const iconName = TAB_ICONS[route.name] ?? 'ellipse';
+          const iconName = TAB_ICONS[route.name] ?? 'ellipse-outline';
 
           const onPress = () => {
             const event = navigation.emit({
@@ -55,8 +56,8 @@ export function BottomNavigation({ state, descriptors, navigation }: BottomTabBa
                 activeOpacity={0.85}
                 className="items-center justify-center px-2"
               >
-                <View className="rounded-full border-2 border-border bg-primary p-3">
-                  <Ionicons name="add" size={28} color="#1F2937" />
+                <View className="rounded-full bg-primary p-3 shadow-warm-sm">
+                  <Ionicons name="add" size={28} color={COLORS.textDark} />
                 </View>
                 <Text className="mt-1 text-[10px] font-bold text-text">{label}</Text>
               </TouchableOpacity>
@@ -72,18 +73,18 @@ export function BottomNavigation({ state, descriptors, navigation }: BottomTabBa
             >
               <View
                 className={`items-center justify-center rounded-full p-2 ${
-                  isFocused ? 'border-2 border-border bg-primary' : ''
+                  isFocused ? 'bg-sand/70' : ''
                 }`}
               >
                 <Ionicons
                   name={iconName}
                   size={22}
-                  color={isFocused ? '#1F2937' : '#6B7280'}
+                  color={isFocused ? COLORS.textDark : COLORS.muted}
                 />
               </View>
               <Text
                 className={`mt-0.5 text-[10px] font-bold ${
-                  isFocused ? 'text-text' : 'text-muted'
+                  isFocused ? 'text-text-dark' : 'text-muted'
                 }`}
                 numberOfLines={1}
               >

@@ -11,6 +11,7 @@ export const semantic: {
   readonly brownDark: '#3B2417';
   readonly background: '#FFF6E5';
   readonly surface: '#FFFDF9';
+  readonly muted: '#8B7355';
 };
 
 export const legacy: {
@@ -29,26 +30,48 @@ export const pastel: {
   readonly sand: '#E8DCC8';
 };
 
-export const COLORS: {
-  readonly primary: string;
-  readonly primaryAccent: string;
-  readonly background: string;
-  readonly surface: string;
-  readonly cream: string;
-  readonly butter: string;
-  readonly lavender: string;
-  readonly pink: string;
-  readonly sky: string;
-  readonly mint: string;
-  readonly sand: string;
-  readonly text: string;
-  readonly textDark: string;
-  readonly muted: string;
-  readonly card: string;
-  readonly border: string;
-  readonly legacyPrimary: string;
-  readonly legacyBackground: string;
-  readonly legacyText: string;
+export const borders: {
+  readonly subtle: string;
+  readonly default: string;
+  readonly focus: string;
+  readonly strong: string;
 };
 
+export const shadows: {
+  readonly warmSm: string;
+  readonly warmMd: string;
+  readonly warmLg: string;
+};
+
+export const typography: Record<
+  string,
+  { size?: number; sizeMobile?: number; lineHeight: number; weight: string }
+>;
+
+export const spacing: Record<string, number>;
+
+export const breakpoints: {
+  readonly tablet: 768;
+  readonly desktop: 1024;
+};
+
+export const motion: {
+  readonly durationFast: 150;
+  readonly durationNormal: 250;
+  readonly durationSlow: 350;
+  readonly easing: string;
+};
+
+export const radius: {
+  readonly sm: 12;
+  readonly md: 16;
+  readonly lg: 20;
+  readonly xl: 24;
+  readonly pill: 9999;
+};
+
+export const COLORS: Record<string, string>;
+
 export const tailwindColors: Record<string, string>;
+
+export const tailwindFontSize: Record<string, [string, Record<string, string>]>;

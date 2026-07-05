@@ -25,7 +25,7 @@ function ColorSwatch({ name, hex }: { name: string; hex: string }) {
   return (
     <View className="mb-3 mr-3 w-[44%]">
       <View
-        className="mb-1 h-12 rounded-2xl border-2 border-border"
+        className="mb-1 h-12 rounded-2xl border border-border"
         style={{ backgroundColor: hex }}
       />
       <Text className="text-xs font-semibold text-text">{name}</Text>
@@ -68,6 +68,8 @@ export default function DesignPreviewScreen() {
           <ColorSwatch name="surface" hex={theme.semantic.surface} />
           <ColorSwatch name="brown" hex={theme.semantic.brown} />
           <ColorSwatch name="brownDark" hex={theme.semantic.brownDark} />
+          <ColorSwatch name="muted" hex={theme.semantic.muted} />
+          <ColorSwatch name="sand" hex={theme.pastel.sand} />
           <ColorSwatch name="legacyPrimary" hex={theme.legacy.primary} />
         </View>
 

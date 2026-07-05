@@ -1,6 +1,7 @@
 import { TouchableOpacity, type TouchableOpacityProps } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/utils/cn';
+import { COLORS } from '@/constants';
 import { shadows } from './shadows';
 
 interface IconButtonProps extends TouchableOpacityProps {
@@ -14,7 +15,7 @@ interface IconButtonProps extends TouchableOpacityProps {
 export function IconButton({
   icon,
   size = 22,
-  color = '#1F2937',
+  color = COLORS.text,
   variant = 'default',
   className,
   style,
@@ -23,17 +24,21 @@ export function IconButton({
   return (
     <TouchableOpacity
       className={cn(
-        'items-center justify-center rounded-full border-2 border-border p-2.5',
-        variant === 'default' && 'bg-card',
+        'items-center justify-center rounded-full p-2.5 web:hover:bg-sand/50',
+        variant === 'default' && 'bg-sand/40',
         variant === 'primary' && 'bg-primary',
-        variant === 'ghost' && 'border-transparent bg-transparent',
+        variant === 'ghost' && 'bg-transparent',
         className
       )}
-      style={[variant !== 'ghost' ? shadows.soft : undefined, style]}
+      style={[variant !== 'ghost' ? shadows.warmSm : undefined, style]}
       activeOpacity={0.8}
       {...props}
     >
-      <Ionicons name={icon} size={size} color={variant === 'primary' ? '#1F2937' : color} />
+      <Ionicons
+        name={icon}
+        size={size}
+        color={variant === 'primary' ? COLORS.textDark : color}
+      />
     </TouchableOpacity>
   );
 }

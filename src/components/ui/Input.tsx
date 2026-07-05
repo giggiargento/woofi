@@ -1,5 +1,6 @@
 import { TextInput, View, Text, type TextInputProps } from 'react-native';
 import { cn } from '@/utils/cn';
+import { COLORS } from '@/constants';
 import { shadows } from './shadows';
 
 interface InputProps extends TextInputProps {
@@ -19,17 +20,18 @@ export function Input({
   return (
     <View className={cn('mb-4', containerClassName)}>
       {label ? (
-        <Text className="mb-2 text-sm font-semibold text-text">{label}</Text>
+        <Text className="mb-2 text-label font-semibold text-text">{label}</Text>
       ) : null}
-      <View style={shadows.soft}>
+      <View style={shadows.warmSm}>
         <TextInput
           className={cn(
-            'rounded-2xl border-2 border-border bg-card px-4 py-3.5 text-base text-text',
+            'rounded-2xl border border-border bg-surface px-4 py-3.5 text-body text-text',
+            'web:focus:border-border-focus',
             error && 'border-pink',
             className
           )}
           style={style}
-          placeholderTextColor="#6B7280"
+          placeholderTextColor={COLORS.muted}
           {...props}
         />
       </View>

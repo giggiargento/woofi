@@ -1,4 +1,17 @@
-import { brand, semantic, legacy, pastel, COLORS } from '@/design/tokens';
+import {
+  brand,
+  semantic,
+  legacy,
+  pastel,
+  borders,
+  shadows as shadowTokens,
+  typography,
+  spacing,
+  breakpoints,
+  motion,
+  radius,
+  COLORS,
+} from '@/design/tokens';
 
 export const theme = {
   brand,
@@ -6,19 +19,13 @@ export const theme = {
   legacy,
   colors: COLORS,
   pastel,
-  radius: {
-    sm: 12,
-    md: 16,
-    lg: 20,
-    xl: 24,
-    pill: 9999,
-  },
-  spacing: {
-    screenX: 16,
-    screenBottom: 112,
-    section: 24,
-    card: 16,
-  },
+  borders,
+  shadows: shadowTokens,
+  typography,
+  spacing,
+  breakpoints,
+  motion,
+  radius,
 } as const;
 
 export type PastelColor =

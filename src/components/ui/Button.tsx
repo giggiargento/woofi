@@ -5,6 +5,7 @@ import {
   type TouchableOpacityProps,
 } from 'react-native';
 import { cn } from '@/utils/cn';
+import { COLORS } from '@/constants';
 import { shadows } from './shadows';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
@@ -20,17 +21,33 @@ interface ButtonProps extends TouchableOpacityProps {
 }
 
 const variantStyles: Record<ButtonVariant, { container: string; text: string }> = {
-  primary: { container: 'bg-primary', text: 'text-text font-bold' },
-  secondary: { container: 'bg-lavender', text: 'text-text font-semibold' },
-  outline: { container: 'bg-card', text: 'text-text font-semibold' },
-  ghost: { container: 'bg-transparent border-transparent', text: 'text-primary font-semibold' },
-  destructive: { container: 'bg-pink', text: 'text-text font-bold' },
+  primary: {
+    container: 'bg-primary web:hover:bg-primary-accent woofi-hover-lift-sm shadow-warm-sm',
+    text: 'text-text-dark font-bold',
+  },
+  secondary: {
+    container: 'bg-lavender web:hover:opacity-90',
+    text: 'text-text font-semibold',
+  },
+  outline: {
+    container:
+      'bg-surface border border-border web:hover:bg-sand/40 woofi-hover-lift-sm shadow-warm-sm',
+    text: 'text-text font-semibold',
+  },
+  ghost: {
+    container: 'bg-transparent web:hover:bg-sand/50',
+    text: 'text-primary font-semibold',
+  },
+  destructive: {
+    container: 'bg-pink web:hover:opacity-90',
+    text: 'text-text font-bold',
+  },
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2.5 rounded-2xl',
-  md: 'px-6 py-3.5 rounded-3xl',
-  lg: 'px-6 py-4 rounded-3xl',
+  sm: 'px-4 py-2.5',
+  md: 'px-6 py-3',
+  lg: 'px-6 py-3.5',
 };
 
 const textSizeStyles: Record<ButtonSize, string> = {
@@ -52,31 +69,27 @@ export function Button({
   ...props
 }: ButtonProps) {
   const styles = variantStyles[variant];
-  const showShadow = variant !== 'ghost';
+  const showShadow = variant === 'primary' || variant === 'outline';
 
   return (
     <TouchableOpacity
       className={cn(
-        'w-full items-center justify-center border-2 border-border',
+        'w-full items-center justify-center rounded-full',
         sizeStyles[size],
         styles.container,
         (disabled || loading) && 'opacity-60',
         className
       )}
-      style={[showShadow ? shadows.soft : undefined, style]}
+      style={[showShadow ? shadows.warmSm : undefined, style]}
       disabled={disabled || loading}
       activeOpacity={0.85}
       onPress={onPress}
       {...props}
     >
       {loading ? (
-        <ActivityIndicator color="#1F2937" />
+        <ActivityIndicator color={COLORS.textDark} />
       ) : (
-        <Text
-          className={cn(textSizeStyles[size], styles.text, textClassName)}
-        >
-          {title}
-        </Text>
+        <Text className={cn(textSizeStyles[size], styles.text, textClassName)}>{title}</Text>
       )}
     </TouchableOpacity>
   );

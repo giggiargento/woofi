@@ -10,7 +10,7 @@ interface SectionHeaderProps {
 export function SectionHeader({ title, actionLabel, onAction, className }: SectionHeaderProps) {
   return (
     <View className={`mb-4 flex-row items-center justify-between ${className ?? ''}`}>
-      <Text className="text-xl font-bold text-text">{title}</Text>
+      <Text className="text-h2 font-bold text-text">{title}</Text>
       {actionLabel && onAction ? (
         <TouchableOpacity onPress={onAction} hitSlop={8}>
           <Text className="text-sm font-semibold text-primary">{actionLabel}</Text>
