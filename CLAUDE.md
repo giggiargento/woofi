@@ -6,19 +6,22 @@ Este archivo es el punto de entrada para retomar el proyecto **sin perder contex
 
 ## Qué es WOOFI
 
-App móvil (Expo / React Native) para:
+Producto **web-first + móvil** (Expo / React Native) para:
 
-1. **Cuaderno digital privado** — perfiles de mascotas del usuario (`pets`)
-2. **Explorador público** — casos de mascotas perdidas, encontradas, adopción y tránsito (`cases`)
+1. **Cuaderno digital privado** — perfiles de mascotas del usuario (`pets`: salud, docs, QR futuro)
+2. **Explorador / comunidad** — casos públicos lost / found / adoption / transit (`cases`)
+3. **Marketing SaaS** — landing pública en web (`MarketingHome`) con CTA a login/registro
 
 - **Idioma default:** Español Argentina (`es-AR`)
-- **Estilo UI:** Pastel, cálido, neubrutalism-lite — primary `#F9A23B`
-- **Backend:** Firebase (`wuffi-d19e9`) — Auth + Firestore + Storage
-- **Runtime actual:** Expo Go (sin dev build / sin `eas.json`)
+- **Estilo UI (dirección):** *Warm Community Organizer* — crema/naranja/marrón, soft-warm, **no** neubrutalism-lite
+  - Tokens: `src/design/tokens.js` — primary `#F7B24A`, background `#FFF6E5`
+  - Spec: `docs/design/VISUAL-DIRECTION.md`, `docs/design/TOKENS-V2.md`
+- **Backend:** Firebase (`wuffi-d19e9`) — Auth + Firestore + Storage (Storage requiere plan Blaze)
+- **Runtime actual:** Expo Go / `npm run web` (sin `eas.json`)
 - **Repo:** https://github.com/giggiargento/woofi
-- **Branch principal:** `master` (sincronizado con `origin/master`)
+- **Branch:** `master`
 
-Último checkpoint relevante (junio 2026): rebrand WUFFI → WOOFI, flujo de mascotas estabilizado, MVP limitado a perros y gatos, base Firebase + i18n + design system completos.
+**Último checkpoint (julio 2026):** marketing home en `/` web, BrandLogo, WebShell, link pet→caso perdido, **tokens v2 + shells desktop WIP**. Grilla desktop / proportions **aún no cierran** — próxima prioridad UI.
 
 ---
 
@@ -26,34 +29,56 @@ App móvil (Expo / React Native) para:
 
 ```bash
 npm install
-cp .env.example .env          # completar EXPO_PUBLIC_FIREBASE_* (nunca commitear .env)
+cp .env.example .env   # completar EXPO_PUBLIC_FIREBASE_* (nunca commitear .env)
 npm run check:firebase
-npm start                       # o: npx expo start --tunnel si LAN falla
+npm start              # o: npm run web
 ```
 
-Verificar antes de un PR:
+Verificar:
 
 ```bash
 npm run typecheck
 npm run audit:i18n
 npm run check:firebase
-npm run verify:firebase         # requiere .env válido + Auth habilitado en Firebase Console
 ```
 
-Probar en dispositivo: **Expo Go** → escanear QR. Si el puerto 8081 está ocupado: `npx expo start --port 8086`.
+Web: http://localhost:8081 — **guest** ve marketing; **logueado** va a tabs.
 
 ---
 
-## Documentación del repo (leer según necesidad)
+## Documentación del repo
 
 | Archivo | Cuándo leerlo |
 |---------|---------------|
-| `docs/CURRENT-STATUS.md` | Estado actual, bugs conocidos, tareas pendientes |
-| `docs/PROJECT-HANDOFF.md` | Onboarding técnico, layout, archivos clave |
-| `docs/DEVELOPMENT-RULES.md` | Reglas i18n, git, coding — **obligatorio** |
-| `docs/WOOFI-ARCHITECTURE-ROADMAP.md` | Visión completa, esquema Firestore, fases |
-| `docs/FIREBASE-SETUP.md` | Setup Firebase Console + CLI |
-| `docs/MVP-AUDIT.md` | Auditoría de funcionalidad MVP |
+| `docs/CURRENT-STATUS.md` | Estado / bugs / pendientes |
+| `docs/design/VISUAL-DIRECTION.md` | **Dirección visual v1** — obligatorio antes de UI |
+| `docs/design/TOKENS-V2.md` | Tokens soft-warm |
+| `docs/design/WEB-MARKETING-HOME.md` | Landing marketing + handoff |
+| `docs/agents/COORDINATION.md` | Roles Dev / UX / Brand |
+| `docs/agents/ACTIVE-TASK.md` | Tarea activa (mantener actualizado) |
+| `docs/agents/CHATS-SETUP.md` | Cómo abrir chats por agente |
+| `docs/brand/BRAND-GUIDELINES.md` | Marca, colores locked, tono |
+| `docs/DEVELOPMENT-RULES.md` | i18n, git, coding |
+| `docs/FIREBASE-SETUP.md` | Firebase Console |
+| `docs/MVP-AUDIT.md` | Gaps funcionales MVP |
+
+---
+
+## Agentes (Cursor / Claude)
+
+Modo recomendado: **1 agente a la vez** (se pisan si van en paralelo).
+
+| Agente | Owns | No tocar |
+|--------|------|----------|
+| **💻 Dev** | `app/`, services, hooks, firebase, routing, layouts estructurales | Estilos en `ui/*`, tokens, brand assets |
+| **🎨 UX** | `src/components/ui/*`, `src/design/`, marketing visuals, docs/design | Firebase, business logic |
+| **🎯 Brand** | `assets/brand/`, `docs/brand/` | App code, components |
+| **📁 Coord** | Prioridades, commits, prompts | Features grandes (derivar) |
+
+Reglas: `.cursor/rules/woofi-*.mdc`  
+Prompts largos: `docs/agents/*-AGENT.md`
+
+**Pendiente UI (julio 2026):** tokens/primitivos soft-warm + `AppSidebar` / `AppDesktopLayout` existen, pero **grilla, tamaños y ubicaciones desktop no convencen**. No seguir metiendo tokens sueltos — cablear sidebar + 1 pantalla de referencia (home o explore).
 
 ---
 
@@ -61,68 +86,57 @@ Probar en dispositivo: **Expo Go** → escanear QR. Si el puerto 8081 está ocup
 
 ### 1. i18n — cero strings hardcodeados en UI
 
-Todo texto visible al usuario va con `t('namespace.key')`:
-
 ```tsx
 import { useTranslation } from 'react-i18next';
 const { t } = useTranslation();
 <Text>{t('home.myPets')}</Text>
 ```
 
-- Agregar keys en **ambos** `src/i18n/locales/es-AR.json` y `en-US.json`
-- Default locale: `es-AR` (no usar idioma del dispositivo)
+- Keys en **ambos** `es-AR.json` y `en-US.json`
+- Default: `es-AR`
 - Verificar: `npm run audit:i18n`
 
 ### 2. `pets` ≠ `cases`
 
-- `pets` = perfiles privados del dueño
-- `cases` = publicaciones públicas (lost / found / adoption / transit)
-- Un `Pet` puede vincularse a un `Case` vía `petId`, pero son entidades separadas
+- `pets` = privados (`ownerId`)
+- `cases` = públicos (lost / found / adoption / transit)
+- Vincular vía `petId`; al publicar lost con pet: `status: 'lost'` + `activeLostCaseId`
 
-### 3. Git — autor de commits
-
-Solo commitear como:
+### 3. Git — autor
 
 | Campo | Valor |
 |-------|--------|
 | Nombre | `Giggi Argento` |
 | Email | `46300924+giggiargento@users.noreply.github.com` |
 
-Verificar antes de commitear:
-
 ```bash
 git config --local user.name
 git config --local user.email
 ```
 
-**Nunca** commitear como `giggi-whalemate` ni `gisela@whalemate.com`.
+**Nunca** `giggi-whalemate` / `gisela@whalemate.com`.
 
 ### 4. UI
 
-- Reutilizar componentes de `src/components/ui/`
-- Primary `#F9A23B`, bordes 2px negros, esquinas redondeadas, sombras suaves
-- Empty states con componente `EmptyState`
-- No usar mock data si Firebase está configurado en `.env`
+- Un solo design system: `src/components/ui/` (+ layout en `src/components/layout/`)
+- Marketing **no** debe duplicar estilos — reutilizar primitivos
+- Colores desde tokens (`#F7B24A` primary, no legacy `#F9A23B` en UI nueva)
+- Soft-warm: pills, radius grande, sombras cálidas — **no** `border-2` negro
+- Empty states: `EmptyState`
+- Sin mock data si Firebase está en `.env`
+- **Desktop-first** para web ≥1024; mobile no estirar a desktop
 
-### 5. Arquitectura de código
+### 5. Arquitectura
 
 ```
 Screen → hook (React Query) → service → Firestore
-                ↓
-         Zustand (auth, explore filters)
+         ↓
+  Zustand (auth, explore filters)
 ```
-
-- Tipos: `src/types/`
-- Validación Zod: `src/schemas/`
-- Lógica de negocio: `src/services/`
-- Hooks: `src/hooks/`
-- Pantallas: `app/` (Expo Router, file-based)
 
 ### 6. Scope mínimo
 
-- Cambios pequeños y enfocados
-- No refactorizar lo que no pide la tarea
-- No agregar tests salvo que se pidan explícitamente
+- Cambios pequeños; sin refactors no pedidos; sin tests salvo pedido
 
 ---
 
@@ -130,146 +144,86 @@ Screen → hook (React Query) → service → Firestore
 
 ```
 WOOFI/
-├── app/                    # Pantallas Expo Router
+├── app/
+│   ├── index.tsx           # web guest → MarketingHome; auth → tabs; native → login
 │   ├── (auth)/             # login, register, forgot-password
 │   ├── (tabs)/             # home, explore, add, alerts, profile
-│   ├── pet/[id]/           # detalle + edit
-│   ├── case/[id]/          # detalle + sighting (placeholder)
-│   ├── create/             # personal/lost/found/adoption/transit
-│   ├── explore/            # map (+ .native.tsx), filters
+│   ├── pet/, case/, create/, explore/, settings/
 │   ├── favorites.tsx
-│   └── settings/
+│   └── design-preview.tsx  # __DEV__ only
 ├── src/
 │   ├── components/ui/      # Design system
-│   ├── hooks/              # useAuth, usePets, useCases, useFavorites
-│   ├── services/           # Firebase + dominio
-│   ├── stores/             # Zustand (auth, explore)
-│   ├── i18n/               # locales + config
-│   ├── types/              # TypeScript
-│   └── schemas/            # Zod
-├── firebase/               # firestore.rules, indexes, storage.rules
-├── scripts/                # verify-firebase, check-env, audit-i18n
-└── docs/                   # Documentación detallada
+│   ├── components/layout/  # WebShell, AppSidebar*, PageHeader* (*WIP)
+│   ├── components/marketing/  # MarketingHome + secciones
+│   ├── design/tokens.js    # Single source of truth
+│   ├── hooks/, services/, stores/, i18n/, types/, schemas/
+├── assets/brand/
+├── firebase/               # rules + indexes (Firestore deployed; Storage needs Blaze)
+├── docs/agents/, docs/design/, docs/brand/
+└── .cursor/rules/
 ```
 
 ---
 
 ## Qué funciona hoy ✅
 
-| Feature | Archivos clave |
-|---------|----------------|
-| Auth email/password | `src/hooks/useAuth.ts`, `src/services/firebase/auth.ts` |
-| Gate de auth | `app/_layout.tsx` |
-| CRUD mascotas (básico) | `src/services/pets/petService.ts`, `app/pet/[id]/` |
-| Casos públicos (4 tipos) | `src/services/cases/caseService.ts`, `app/create/` |
-| Explorar (tabs, búsqueda, filtros) | `app/(tabs)/explore.tsx`, `src/stores/exploreStore.ts` |
-| Favoritos | `src/services/favorites/favoriteService.ts`, `app/favorites.tsx` |
-| Mapa nativo (parcial) | `app/explore/map.native.tsx` |
-| Web con fallback lista | `app/explore/map.tsx` |
-| Design system | `src/components/ui/` |
-| i18n es-AR + en-US | `src/i18n/` |
+| Feature | Notas |
+|---------|--------|
+| Auth email/password + reset | Firebase Auth |
+| Marketing home web `/` | Guest only; AuthGate exception |
+| BrandLogo en login/register | Web-safe SVG |
+| WebShell responsive | max-w-6xl |
+| CRUD pets, cases, favorites | Básico |
+| Link pet → lost case | `status` + `activeLostCaseId` |
+| Explore, filtros, mapa parcial | Web = lista fallback |
+| i18n es-AR + en-US | Incl. `marketing.*` |
+| Firestore rules | Deployed en `wuffi-d19e9` |
+| Tokens v2 + soft primitives | WIP en `master` (`6e74ecc`) |
+
+## Qué NO asumir / pendiente ❌
+
+| Item | Estado |
+|------|--------|
+| **Grilla / layout desktop app** | No cierra — sidebar shell existe, no cableado bien |
+| Storage fotos | Pausado — Firebase pide Blaze |
+| Sightings | Placeholder |
+| Tab Alertas | Vacío |
+| QR profiles | No iniciado |
+| Google/Apple login | Stub |
+| AppSidebar en tabs web | Scaffold only |
+| EAS / producción | Sin `eas.json` |
+| Tests | Ninguno |
 
 ---
 
-## Qué NO funciona / no asumir ❌
+## Tareas prioritarias (retomar)
 
-| Feature | Estado | Dónde empezar |
-|---------|--------|---------------|
-| Reportar avistamiento | UI placeholder vacío | `app/case/[id]/sighting.tsx` |
-| Push / notificaciones | Tab Alertas vacío | `app/(tabs)/alerts.tsx` |
-| QR profiles | No iniciado | Ver roadmap § QRProfile |
-| Google/Apple login | Stub | `src/services/firebase/googleAuth.ts` |
-| Cambio de idioma en settings | Solo muestra locale | `app/settings/index.tsx` |
-| Fotos en flujos de creación | Envían `photoUrls: []` | `app/create/*/` |
-| Organizaciones / refugios | No iniciado | — |
-| EAS Build / producción | Sin `eas.json` | — |
-| Tests | Ninguno | — |
+### 1. Desktop layout que se vea bien (URGENTE UI)
+Cablear `AppDesktopLayout` / `AppSidebar` en web ≥1024; **home o explore** como pantalla de referencia. Seguir `VISUAL-DIRECTION.md`. No más tokens sueltos.
+
+### 2. Refinar marketing home
+Proportions / grilla según referencias soft (sin copiar colores).
+
+### 3. MVP funcional (después de UI usable)
+- Sightings, alertas, case status updates
+- Photos cuando haya Blaze / Storage
+- Province picker completo
+
+### 4. Storage + fotos (cuando haya plan Blaze)
+Ver `docs/FIREBASE-SETUP.md` + `ACTIVE-TASK` históricos.
 
 ---
 
 ## Colecciones Firestore
 
-| Colección | Implementada | Notas |
-|-----------|--------------|-------|
-| `users` | ✅ | Perfil al registrarse |
-| `pets` | ✅ | Privados, `ownerId` |
-| `cases` | ✅ | Públicos, tipos lost/found/adoption/transit |
-| `favorites` | ✅ | Casos guardados por usuario |
-| `sightings` | ❌ | Próxima feature importante |
-| `notifications` | ❌ | Tab Alertas pendiente |
-| `qrProfiles` | ❌ | Futuro |
-| `organizations` | ❌ | Futuro |
-
-Reglas e índices en `firebase/`. **Deploy pendiente de confirmar** en producción (`wuffi-d19e9`).
-
----
-
-## Tareas prioritarias (retomar en este orden)
-
-Estas son las siguientes tareas acordadas. Elegí una y completala de punta a punta antes de pasar a la siguiente.
-
-### 1. Deploy Firebase rules
-Confirmar que `firestore.rules`, `firestore.indexes.json` y `storage.rules` están desplegados en `wuffi-d19e9`.
-- Archivos: `firebase/`
-- Guía: `docs/FIREBASE-SETUP.md`
-- Comando: `firebase deploy --only firestore,storage`
-
-### 2. Photo upload end-to-end
-Conectar flujos de creación de mascota/caso con Storage. Mostrar imágenes en cards.
-- Servicio existente: `src/services/firebase/storage.ts`
-- Referencia (edit ya tiene picker): `app/pet/[id]/edit.tsx`
-- Pendiente: `app/create/personal/`, `app/create/lost/`, etc.
-
-### 3. Report sighting flow
-Implementar avistamientos con colección `sightings`.
-- Pantalla placeholder: `app/case/[id]/sighting.tsx`
-- Crear: tipo en `src/types/`, schema en `src/schemas/`, service, hook
-- i18n: keys en `case.sighting.*`
-
-### 4. Google Maps API key
-Habilitar mapas completos en Android Expo Go.
-- Env: `EXPO_PUBLIC_GOOGLE_MAPS_API_KEY` en `.env`
-- Pantalla: `app/explore/map.native.tsx`
-
-### 5. Notifications MVP
-Leer colección `notifications` y poblar tab Alertas.
-- Pantalla: `app/(tabs)/alerts.tsx`
-- Crear service + hook + tipos
-
-### 6. Language switcher en settings
-Persistir `userProfile.locale` y llamar `i18n.changeLanguage`.
-- Pantalla: `app/settings/index.tsx`
-- User service: `src/services/users/userService.ts`
-
-### 7. Case status updates
-Acciones del dueño: marcar sighted / found / closed.
-- Detalle: `app/case/[id].tsx`
-- Service: `src/services/cases/caseService.ts`
-- Utils: `src/utils/caseStatus.ts`
-
-### 8. Province picker reutilizable
-Lista completa de provincias para todos los create/filter screens.
-- Referencia parcial: `src/i18n/provinces.ts`, `locations.provinces.*`
-- Algunos create flows solo tienen 6–8 chips hardcodeados
-
----
-
-## Archivos clave por tarea común
-
-| Quiero… | Empezar en… |
-|---------|-------------|
-| Nueva pantalla | `app/` + registrar en `_layout.tsx` si hace falta |
-| Nuevo componente UI | `src/components/ui/` + export en `src/components/index.ts` |
-| Nueva traducción | `src/i18n/locales/es-AR.json` + `en-US.json` |
-| Nuevo campo Firestore | `src/types/` → `src/schemas/` → service → hook → screen |
-| Nueva tab | `app/(tabs)/_layout.tsx` + archivo en `(tabs)/` |
-| Reglas Firebase | `firebase/firestore.rules` → deploy |
+| Colección | Estado |
+|-----------|--------|
+| `users`, `pets`, `cases`, `favorites` | ✅ |
+| `sightings`, `notifications`, `qrProfiles`, `organizations` | ❌ |
 
 ---
 
 ## Variables de entorno
-
-Copiar `.env.example` → `.env` (gitignored, nunca commitear):
 
 ```env
 EXPO_PUBLIC_FIREBASE_API_KEY=
@@ -278,7 +232,6 @@ EXPO_PUBLIC_FIREBASE_PROJECT_ID=
 EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=
 EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 EXPO_PUBLIC_FIREBASE_APP_ID=
-
 # Opcional
 EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=
 ```
@@ -287,13 +240,11 @@ EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=
 
 ## Bugs / limitaciones conocidas
 
-- Puerto **8081** ocupado si hay varias instancias de Expo → usar `--port 8086`
-- Tunnel (`--tunnel`) lento; preferir LAN en misma Wi‑Fi
-- Sin dark mode
-- Layout mobile-first; tablet no optimizado
-- Algunos create flows (adoption, transit) usan CABA por default sin picker de provincia
-- `newArchEnabled: true` en `app.config.ts` — vigilar compatibilidad Expo Go
-- Errores en services en inglés (aceptable, no son user-facing)
+- Marketing / app: look aún no unificado; desktop se siente “mobile estirado”
+- Storage no habilitado sin Blaze
+- Puerto 8081 a veces ocupado → `--port 8086`
+- Sin dark mode; tablet no optimizado
+- Legacy colors aún en algunos spinners / layouts
 
 ---
 
@@ -301,35 +252,44 @@ EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=
 
 | Capa | Tecnología |
 |------|------------|
-| Framework | Expo SDK 53, React Native 0.79, React 19 |
-| Navegación | Expo Router (file-based) |
-| Estilos | NativeWind 4 + Tailwind CSS |
-| Estado | Zustand (auth, explore) |
-| Data fetching | TanStack React Query |
-| Validación | Zod |
-| Backend | Firebase JS SDK v11 |
-| i18n | i18next + react-i18next |
-| Mapas | react-native-maps (native), lista en web |
-| Fuentes | Inter (@expo-google-fonts/inter) |
+| Framework | Expo SDK 53, RN 0.79, React 19 |
+| Nav | Expo Router |
+| Estilos | NativeWind 4 + Tailwind |
+| Estado | Zustand |
+| Data | TanStack Query + Firebase JS v11 |
+| i18n | i18next |
+| Mapas | react-native-maps / lista web |
+| Fonts | Inter |
 
 ---
 
 ## Cómo retomar una sesión
 
-1. Leer este archivo (`CLAUDE.md`)
-2. Leer `docs/CURRENT-STATUS.md` para el detalle más reciente
-3. Preguntar al usuario qué tarea quiere (o tomar la #1 de la lista priorizada)
-4. Antes de commitear: `npm run verify` + verificar autor git
-5. Actualizar `docs/CURRENT-STATUS.md` si se completa una feature significativa
+1. Leer `CLAUDE.md`
+2. Leer `docs/design/VISUAL-DIRECTION.md` + `docs/CURRENT-STATUS.md`
+3. Ver `docs/agents/ACTIVE-TASK.md`
+4. Un scope a la vez; plan → OK → código
+5. `npm run typecheck` + `npm run audit:i18n`
+6. Actualizar CURRENT-STATUS / ACTIVE-TASK si el progreso es grande
 
 ---
 
-## Instrucción para el usuario al abrir Claude Code
-
-Pegá esto en el primer mensaje si querés retomar rápido:
+## Mensaje para pegar en Claude Code / Cursor (actualizado)
 
 ```
-Estoy retomando WOOFI. Lee CLAUDE.md y docs/CURRENT-STATUS.md.
-Quiero continuar con la tarea [N]: [descripción].
-Confirmá qué archivos vas a tocar antes de empezar.
+Estoy retomando WOOFI. Leé:
+- CLAUDE.md
+- docs/design/VISUAL-DIRECTION.md
+- docs/design/TOKENS-V2.md
+- docs/CURRENT-STATUS.md
+- docs/agents/ACTIVE-TASK.md
+
+Contexto julio 2026:
+- master en origin al día (último: tokens v2 WIP + marketing en / web)
+- Firebase rules Firestore deployed; Storage pausado (Blaze)
+- Pet→lost case link ya implementado
+- Design system soft-warm parcial: primitivos + AppSidebar scaffold — PERO grilla/tamaños/ubicación desktop NO convencen
+
+Prioridad ahora: layout desktop usable (sidebar cableada + 1 pantalla referencia home o explore).
+NO más tokens sueltos. Seguí VISUAL-DIRECTION. Confirmá archivos antes de codear.
 ```

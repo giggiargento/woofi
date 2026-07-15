@@ -2,7 +2,9 @@
 
 Three specialized agents (+ one coordination chat). **Do not overwrite each other's domain.**
 
-**Tarea activa (modo simple):** `docs/agents/ACTIVE-TASK.md` — un agente, un scope, commitea 📁.
+**Tarea activa (modo simple):** `docs/agents/ACTIVE-TASK.md` — un agente, un scope, commits desde coordinador.
+
+Entrypoint Claude Code: `CLAUDE.md` (actualizado julio 2026).
 
 Setup: `docs/agents/CHATS-SETUP.md`
 

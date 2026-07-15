@@ -1,7 +1,7 @@
 # WOOFI — Tarea activa
 
 **Modo:** simple (1 agente a la vez)  
-**Última actualización:** julio 2026
+**Última actualización:** julio 2026 (post tokens v2 WIP)
 
 ---
 
@@ -10,59 +10,63 @@
 | Agente | Estado |
 |--------|--------|
 | 📁 Coordinación | Activo |
-| 💻 Dev | **TAREA B** abajo |
-| 🎨 UX | **PAUSA** |
-| 🎯 Brand | **PAUSA** |
+| 💻 Dev | En espera de layout desktop / cablear shells |
+| 🎨 UX | **Próxima:** grillas + proportions desktop (tokens/parcial hechos) |
+| 🎯 Brand | **PAUSA** — guidelines OK |
 
 ---
 
-## TAREA B — 💻 Dev (activa)
+## TAREA ACTIVA — Desktop layout usable
 
-**Objetivo:** Al publicar un caso "perdida" desde una mascota, actualizar el pet en Firestore.
+**Problema:** tokens v2 + soft primitives + `AppSidebar`/`AppDesktopLayout` scaffold existen (`6e74ecc`), pero **grilla, tamaños y ubicación de elementos no convencen**. Marketing/app siguen sintiéndose mal en desktop.
 
-### Hacer
+### Objetivo
 
-Cuando se publica en `app/create/lost/[step].tsx` (con `petId`):
+1. Cablear sidebar en web ≥1024 (`app/(tabs)/_layout.tsx` + layout shells)
+2. Una pantalla referencia (home **o** explore) con grilla desktop real según `VISUAL-DIRECTION.md`
+3. Bottom tabs **solo** mobile; desktop **no** tabs abajo
 
-1. `pet.status` → `'lost'`
-2. `pet.activeLostCaseId` → id del caso creado
+### Docs a seguir
 
-Usar `petService` / hooks existentes. Sin Storage ni fotos.
-
-### Archivos permitidos
-
-- `app/create/lost/**`
-- `src/services/pets/**`, `src/services/cases/**`
-- `src/hooks/**`
-- `src/i18n/locales/*.json` (si hace falta)
+- `docs/design/VISUAL-DIRECTION.md`
+- `docs/design/TOKENS-V2.md`
 
 ### PROHIBIDO
 
-- `src/components/ui/*`, `docs/brand/`, `theme`, `tailwind`, Storage
+- Más tokens sueltos sin pantalla visible
+- Storage / Blaze / fotos (pausado)
+- Brand assets sin pedido
 
 ### Al terminar
 
-`npm run typecheck && npm run audit:i18n` — listar cambios — **no commitear**.
+`npm run typecheck && npm run audit:i18n` — listar archivos — no commitear sin aviso en coord.
 
 ---
+
+## Hecho recientemente
+
+| ID | Qué | Estado |
+|----|-----|--------|
+| B | Pet → lost case (`status` + `activeLostCaseId`) | ✅ |
+| Marketing | `MarketingHome` en `/` web + AuthGate | ✅ (visual WIP) |
+| Tokens v2 | Soft-warm primitives + layout scaffolds | ✅ parcial / visual no OK |
 
 ## Cola
 
 | ID | Tarea | Notas |
 |----|-------|-------|
-| A | Fotos + Storage | **Pausada** — requiere plan Blaze |
-| C | Tab Alertas | Después de B |
-| D | Pulir UI | UX, después |
+| A | Fotos + Storage | Pausada — Blaze |
+| C | Tab Alertas | Después |
+| D | Sightings | Después |
+| E | Pulir marketing proportions | Con UX |
 
 ---
 
-## Prompt 💻 Dev
+## Prompt corto (pegar)
 
 ```
-PAUSA design system / tokens / brand / Storage.
+Leé CLAUDE.md + docs/design/VISUAL-DIRECTION.md + docs/agents/ACTIVE-TASK.md.
 
-Leé @docs/agents/ACTIVE-TASK.md — TAREA B.
-
-Plan primero. No codees hasta mi OK.
-PROHIBIDO: src/components/ui/*, docs/brand/, theme, tailwind.
+Prioridad: desktop layout usable (sidebar + 1 pantalla referencia).
+Sin más tokens sueltos. Plan primero, archivos listados, sin código hasta OK.
 ```

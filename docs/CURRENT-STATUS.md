@@ -1,9 +1,11 @@
 # WOOFI Current Status
 
-**Last updated:** June 2026  
+**Last updated:** July 2026  
 **Repository:** https://github.com/giggiargento/woofi  
 **Firebase project:** `wuffi-d19e9`  
-**Runtime:** Expo Go (no development build configured)
+**Runtime:** Expo Go + `npm run web` (no EAS)
+
+**Checkpoint:** `6e74ecc` — tokens v2 WIP + marketing on `/`. See `CLAUDE.md` and `docs/design/VISUAL-DIRECTION.md`.
 
 ---
 
@@ -11,29 +13,31 @@
 
 ### Purpose of the application
 
-**WOOFI** is a mobile app for pet owners and the community around them. It combines:
+**WOOFI** is a **web-first + mobile** pet care and community product:
 
-1. **Personal pet notebook** — Private digital profiles for the user's pets (health notes, photos, status).
-2. **Public explorer** — Community posts for lost pets, found pets, adoptions, and temporary transit care.
+1. **Personal pet notebook** — Private profiles (`pets`: health, docs, QR future).
+2. **Public explorer** — Lost / found / adoption / transit (`cases`).
+3. **Marketing SaaS landing** — Guest web `/` → `MarketingHome`; auth → app.
 
-The product goal is a **warm, friendly, premium pet app** — not a generic emergency tool.
+Product goal: **warm, friendly, organized** — not emergency / clinical.
 
 ### Main features implemented
 
 | Area | Status |
 |------|--------|
-| Email/password auth (login, register, forgot password, logout) | ✅ |
+| Email/password auth + password reset | ✅ |
+| Web marketing home `/` (guest) + AuthGate exception | ✅ (visual WIP) |
+| BrandLogo on login/register | ✅ |
+| WebShell + route group layouts | ✅ |
 | Auth gate + protected tabs | ✅ |
-| Home with pets, quick actions, nearby cases, favorites count | ✅ |
-| Explore with tabs, search, filters, list + map entry | ✅ |
-| Pet CRUD (create, view, edit) | ✅ Basic |
-| Public cases (create lost/found/adoption/transit, view detail) | ✅ Basic |
-| Favorites (save cases) | ✅ |
-| Profile + settings placeholder | ✅ |
-| i18n (es-AR default, en-US secondary) | ✅ |
-| Design system UI refactor | ✅ |
-| Native map (Android/iOS via Expo Go) | ⚠️ Partial |
-| Web export with map fallback | ✅ |
+| Home / Explore / Pet CRUD / Cases / Favorites | ✅ Basic |
+| Pet → lost case link (`status` + `activeLostCaseId`) | ✅ |
+| i18n es-AR + en-US (+ `marketing.*`) | ✅ |
+| Soft-warm tokens v2 + ui primitives | ⚠️ Partial |
+| AppSidebar / AppDesktopLayout scaffolds | ⚠️ Not wired / grid poor |
+| Native map / web list fallback | ⚠️ Partial |
+| Storage photo upload | ❌ Needs Blaze |
+| Alerts / sightings / QR | ❌ |
 
 ### Current stack
 
@@ -175,8 +179,8 @@ Screens refactored to use the design system (tabs, auth, detail, create index, f
 | Service | Client SDK | Rules/Config in repo |
 |---------|------------|----------------------|
 | Authentication | ✅ Email/password | Firebase Console |
-| Cloud Firestore | ✅ | `firebase/firestore.rules`, `firebase/firestore.indexes.json` |
-| Cloud Storage | ✅ Client ready | `firebase/storage.rules` |
+| Cloud Firestore | ✅ | Rules+indexes **deployed** to `wuffi-d19e9` (July 2026) |
+| Cloud Storage | ⚠️ Client + `storage.rules` in repo | Enable in Console needs **Blaze** — photos paused |
 | Project ID | `wuffi-d19e9` | `.firebaserc` |
 
 ### Services pending
@@ -185,7 +189,7 @@ Screens refactored to use the design system (tabs, auth, detail, create index, f
 |---------|--------|
 | Firebase Cloud Messaging | Push notifications |
 | Firebase App Check | Recommended before production |
-| Rules/index deploy | Run `firebase deploy` per `docs/FIREBASE-SETUP.md` if not done on target project |
+| Storage enable + deploy rules | Requires Blaze; then `firebase deploy --only storage` |
 | Google Maps API | Optional env var for native maps |
 
 ### Required environment variables
@@ -230,11 +234,13 @@ Full setup guide: `docs/FIREBASE-SETUP.md`
 - Some create flows (adoption, transit) lack province picker UI (uses default CABA)
 - Profile "my cases" empty state is minimal text, not full `EmptyState` component
 
-### Responsive issues
+### Responsive / design issues (July 2026 priority)
 
-- Web layout works but bottom tab bar spacing assumes mobile safe areas
-- `InfoChipGrid` uses fixed ~47% width — may need flex tweaks on very small screens
-- Horizontal quick-action scroll has no snap points
+- Desktop app still feels like **stretched mobile** (bottom tabs on wide web)
+- `AppSidebar` / `AppDesktopLayout` exist but **not convincing** (grid, sizes, placement)
+- Marketing home live but proportions / density need redesign pass
+- Soft-warm tokens partial — legacy colors still in some spinners/layouts
+- `InfoChipGrid` ~47% width; quick-action scroll has no snap points
 
 ### Technical debt
 
@@ -261,10 +267,11 @@ Summary — full detail in `docs/DEVELOPMENT-RULES.md`.
 
 ### UI requirements
 
-- Use components from `src/components/ui/`
-- Primary `#F9A23B`, pastel accents, 2px black borders, rounded corners, soft shadows
-- Cute, cozy, pet-focused — avoid generic enterprise UI
-- Empty states must use `EmptyState` component
+- Use components from `src/components/ui/` (+ layout in `src/components/layout/`)
+- Colors from `src/design/tokens.js` — primary `#F7B24A`, background `#FFF6E5`
+- Soft-warm direction: pills, large radius, warm shadows — **no** black 2px borders
+- Spec: `docs/design/VISUAL-DIRECTION.md`
+- Empty states: `EmptyState`
 
 ### Architecture requirements
 
